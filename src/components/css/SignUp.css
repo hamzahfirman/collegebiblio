@@ -1,0 +1,36 @@
+hr {
+    width: 350px;
+    margin-left: 70px;
+    background-color: coral;
+    
+}.shippingForm {
+    color:white;
+    background-color:teal;
+    background-size: 20px;
+    margin-left: 70px;
+    margin-right: 70px;
+    margin-top: 50px;
+    padding-right: 50px;
+    font-size: 11px;
+  
+
+}
+.name {
+    margin-left: 80px;
+}
+.address {
+    margin-left: 80px;
+}
+.email {
+    margin-left:80px;
+}
+#short{
+    width: 150px;
+    height: 25px;
+    font-size: 10px;
+}
+#long {
+    width: 303px;
+    height: 20px;
+    font-size: 10px;
+}
