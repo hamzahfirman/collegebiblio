@@ -16,12 +16,22 @@ class Home extends React.Component {
     this.setState({ signUp: true });
   };
 
-  componentDidMount() {
-    console.log(this.props.state);
-  }
+  handleOnClickSignUp = () => {
+    this.setState({ signUp: true });
+  };
+  // componentDidMount() {
+  //   console.log(this.props.history);
+  // }
   render() {
     let { signedIn, signUp } = this.state;
+    let location = this.props.history.location;
 
+    // Check for sign up values
+    // if(location){
+    //   if(location.state){
+
+    //   }
+    // }
     if (signedIn) {
       return <div>Home: I am signed in!</div>;
     }

@@ -80,23 +80,16 @@ class Signup extends React.Component {
 
         <Formik
           initialValues={{
-            firstName: "",
-            lastName: "",
+            username: "",
             email: "",
             password: "",
             acceptedTerms: false, // added for our checkbox
             jobType: "" // added for our select
           }}
           validationSchema={Yup.object({
-            firstName: Yup.string()
+            username: Yup.string()
 
               .max(15, "Must be 15 characters or less")
-
-              .required("Required"),
-
-            lastName: Yup.string()
-
-              .max(20, "Must be 20 characters or less")
 
               .required("Required"),
 
@@ -126,22 +119,15 @@ class Signup extends React.Component {
           })}
           onSubmit={values => {
             alert("SUCCESS!! :-)\n\n" + JSON.stringify(values, null, 4));
-            this.props.history.push("/");
+            this.props.history.push({ pathname: "/", state: values });
           }}
         >
           <Form>
             <MyTextInput
-              label="First Name"
-              name="firstName"
+              label="Username"
+              name="username"
               type="text"
-              placeholder="Jane"
-            />
-
-            <MyTextInput
-              label="Last Name"
-              name="lastName"
-              type="text"
-              placeholder="Doe"
+              placeholder="Be creative ..."
             />
 
             <MyTextInput
