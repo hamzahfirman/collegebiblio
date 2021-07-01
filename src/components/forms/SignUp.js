@@ -98,8 +98,9 @@ class Signup extends React.Component {
               .min(8, "Must be at least 8 characters")
 
               .required("Required"),
-            email: Yup.string().email("Invalid email address"),
-            // .required("Required"),
+            email: Yup.string()
+              .email("Invalid email address")
+              .required("Required"),
 
             acceptedTerms: Yup.boolean()
 
@@ -118,7 +119,6 @@ class Signup extends React.Component {
               .required("Required")
           })}
           onSubmit={values => {
-            alert("SUCCESS!! :-)\n\n" + JSON.stringify(values, null, 4));
             this.props.history.push({ pathname: "/", state: values });
           }}
         >
