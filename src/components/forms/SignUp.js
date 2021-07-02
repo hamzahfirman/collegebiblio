@@ -2,7 +2,14 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Formik, Form, useField } from "formik";
 import * as Yup from "yup";
+import { connect } from "react-redux";
 
+// Notes:
+// connect()(signUp) is equal to:
+// function connect() {
+//   return function() {
+//      return 'Hi There'
+// }}
 const MyTextInput = ({ label, ...props }) => {
   // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
 
@@ -76,7 +83,7 @@ class Signup extends React.Component {
   render() {
     return (
       <div>
-        <h1>Subscribe!</h1>
+        <h1>You Are One Step Away!</h1>
 
         <Formik
           initialValues={{
@@ -168,4 +175,4 @@ class Signup extends React.Component {
   }
 }
 
-export default Signup;
+export default connect()(Signup);

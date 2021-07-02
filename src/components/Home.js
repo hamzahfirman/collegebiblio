@@ -3,6 +3,8 @@ import { Button } from "react-bootstrap";
 import { Link, Redirect } from "react-router-dom";
 import "./css/Home.css";
 
+import ShippingAdd from "./forms/ShippingAdd";
+
 class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -33,6 +35,7 @@ class Home extends React.Component {
           <b>
             <i>{username}</i>
           </b>
+          <ShippingAdd />
         </div>
       );
     }
