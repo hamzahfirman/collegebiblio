@@ -4,6 +4,8 @@ import { Formik, Form, useField } from "formik";
 import * as Yup from "yup";
 import { connect } from "react-redux";
 
+import { signedUp } from "../../actions";
+
 // Notes:
 // connect()(signUp) is equal to:
 // function connect() {
@@ -126,7 +128,9 @@ class Signup extends React.Component {
               .required("Required")
           })}
           onSubmit={values => {
-            this.props.history.push({ pathname: "/", state: values });
+            this.props.history
+              .push({ pathname: "/", state: values })
+              .this.props.signedUp(values);
           }}
         >
           <Form>
@@ -174,5 +178,12 @@ class Signup extends React.Component {
     );
   }
 }
+// Notes:
+// 'connect' helps to call actions
+const mapStateToProps = state => {
+  return { items: state.items };
+};
 
-export default connect()(Signup);
+export default connect(mapStateToProps, {
+  signedUp
+})(Signup);

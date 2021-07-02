@@ -17,7 +17,9 @@ const newUsersReducer = (listOfUsers = [], action) => {
 };
 
 // const selectedItem = () => {}
-
+// Notes:
+// Each key holds the return values from its
+// associated reducers
 export default combineReducers({
   users: newUsersReducer,
   items: itemsReducer

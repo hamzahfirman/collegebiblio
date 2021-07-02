@@ -34,7 +34,6 @@ class Home extends React.Component {
     let location = this.props.history.location;
     let username = "";
 
-    console.log(this.props.items);
     // Check for sign up values
     if (location) {
       if (location.state) {
@@ -82,7 +81,7 @@ class Home extends React.Component {
 // inorder to configure connect to ask Provider for data in
 // store
 const mapStateToProps = state => {
-  return { items: state.items };
+  return { items: state.items, username: state.users };
 };
 
 export default connect(mapStateToProps)(Home);
