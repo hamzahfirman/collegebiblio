@@ -4,7 +4,7 @@ import { Formik, Form, useField } from "formik";
 import * as Yup from "yup";
 import { connect } from "react-redux";
 
-import { signedUp } from "../../actions";
+import { currUser } from "../../actions";
 
 // Notes:
 // connect()(signUp) is equal to:
@@ -89,6 +89,8 @@ class Signup extends React.Component {
 
         <Formik
           initialValues={{
+            firstName: "",
+            lastName: "",
             username: "",
             email: "",
             password: "",
@@ -96,6 +98,16 @@ class Signup extends React.Component {
             jobType: "" // added for our select
           }}
           validationSchema={Yup.object({
+            firstName: Yup.string()
+
+              .max(15, "Must be 15 characters or less")
+
+              .required("Required"),
+            lastName: Yup.string()
+
+              .max(15, "Must be 15 characters or less")
+
+              .required("Required"),
             username: Yup.string()
 
               .max(15, "Must be 15 characters or less")
@@ -128,18 +140,13 @@ class Signup extends React.Component {
               .required("Required")
           })}
           onSubmit={values => {
-            this.props.history
-              .push({ pathname: "/", state: values })
-              .this.props.signedUp(values);
+            this.props.history.push({ pathname: "/", state: values });
           }}
         >
           <Form>
-            <MyTextInput
-              label="Username"
-              name="username"
-              type="text"
-              placeholder="Be creative ..."
-            />
+            <MyTextInput label="First Name" name="firstName" type="text" />
+            <MyTextInput label="Last Name" name="lastName" type="text" />
+            <MyTextInput label="Username" name="username" type="text" />
 
             <MyTextInput
               label="Email Address"
@@ -148,12 +155,7 @@ class Signup extends React.Component {
               placeholder="jane@formik.com"
             />
 
-            <MyTextInput
-              label="Password"
-              name="password"
-              type="password"
-              placeholder="sdsds"
-            />
+            <MyTextInput label="Password" name="password" type="password" />
 
             <MySelect label="Job Type" name="jobType">
               <option value="">Select a job type</option>
@@ -185,5 +187,5 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, {
-  signedUp
+  currUser
 })(Signup);

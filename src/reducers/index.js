@@ -8,11 +8,20 @@ const itemsReducer = () => {
     { brand: "Nike", color: "Yellow", size: "11" }
   ];
 };
-
-const newUsersReducer = (listOfUsers = [], action) => {
-  if (action.type === "SIGN_UP") {
-    return [...listOfUsers, action.payload];
+// const newUsersReducer = (listOfUsers = [], action) => {
+//   if (action.type === "SIGN_UP") {
+//     if (!listOfUsers.filter(user => user === action.payload.username)) {
+//       return [...listOfUsers, action.payload];
+//     }
+//   }
+//   return listOfUsers;
+// };
+const newUsersReducer = (listOfUsers = {}, action) => {
+  if (action.type === "SIGNED_IN") {
+    listOfUsers = action.payload;
+    return listOfUsers;
   }
+
   return listOfUsers;
 };
 

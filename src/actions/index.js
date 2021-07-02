@@ -1,8 +1,8 @@
 // Action creator
 // Notes: 'export' allow exporting multiple functions
-export const signedUp = loginInfo => {
+export const currUser = loginInfo => {
   return {
-    type: "SIGN_UP",
+    type: "SIGNED_IN",
     payload: loginInfo
   };
 };

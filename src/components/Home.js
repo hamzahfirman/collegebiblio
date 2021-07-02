@@ -4,8 +4,7 @@ import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
 import "./css/Home.css";
-import ShippingAdd from "./forms/ShippingAdd";
-import { addedItem } from "../actions";
+import { addedItem, currUser } from "../actions";
 
 class Home extends React.Component {
   constructor(props) {
@@ -30,8 +29,22 @@ class Home extends React.Component {
     this.setState({ signUp: true });
   };
 
+  handleOnClickCheckout = () => {
+    this.props.history.push({ pathname: "/shipping-add" });
+  };
+
+  componentDidMount() {
+    const location = this.props.history.location;
+    // Check for sign up values
+    if (location) {
+      if (location.state) {
+        this.props.currUser(location.state);
+      }
+    }
+  }
+
   render() {
-    let { signedIn, signUp } = this.state;
+    let { signUp } = this.state;
     let location = this.props.history.location;
     let username = "";
 
@@ -48,7 +61,10 @@ class Home extends React.Component {
           <b>
             <i>{username}</i>
           </b>
-          <div>Shopping cart: {this.props.selectedItem}</div>
+          <div>
+            Shopping cart: {this.props.selectedItem}
+            <button onClick={this.handleOnClickCheckout}>Checkout</button>
+          </div>
           <br></br>
           <br></br>
           {this.renderListOfItems()}
@@ -91,5 +107,6 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, {
-  addedItem
+  addedItem,
+  currUser
 })(Home);

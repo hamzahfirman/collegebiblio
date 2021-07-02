@@ -9,6 +9,7 @@ import {
   Button,
   TextField
 } from "@material-ui/core";
+import { connect } from "react-redux";
 
 import "../css/ShippingAdd.css";
 
@@ -30,13 +31,13 @@ const validationSchema = yup.object({
   cardNumber: yup.string("Select your payment method").required("Required")
 });
 
-const ShippingAdd = () => {
+const ShippingAdd = props => {
   const formik = useFormik({
     initialValues: {
-      firstName: "",
-      lastName: "",
+      firstName: props.user.firstName,
+      lastName: props.user.lastName,
       address: "",
-      email: "",
+      email: props.user.email,
       paymentMethod: "",
       cardNumber: ""
     },
@@ -133,4 +134,12 @@ const ShippingAdd = () => {
   );
 };
 
-export default ShippingAdd;
+const mapStateToProps = state => {
+  return {
+    items: state.items,
+    user: state.users,
+    selectedItem: state.selectedItem
+  };
+};
+
+export default connect(mapStateToProps)(ShippingAdd);
