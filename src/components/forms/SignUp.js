@@ -179,7 +179,7 @@ class Signup extends React.Component {
   }
 }
 // Notes:
-// 'connect' helps to call actions
+// 'connect' helps to call actions and puts into dispatch functions
 const mapStateToProps = state => {
   return { items: state.items };
 };

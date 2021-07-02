@@ -6,3 +6,10 @@ export const signedUp = loginInfo => {
     payload: loginInfo
   };
 };
+
+export const addedItem = increment => {
+  return {
+    type: "ADD_ITEM",
+    payload: increment
+  };
+};

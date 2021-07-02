@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 
 import "./css/Home.css";
 import ShippingAdd from "./forms/ShippingAdd";
+import { addedItem } from "../actions";
 
 class Home extends React.Component {
   constructor(props) {
@@ -18,7 +19,7 @@ class Home extends React.Component {
       return (
         <div>
           {item.brand}, {item.color}, {item.size}
-          <button>Select</button>
+          <button onClick={() => this.props.addedItem(1)}>Select</button>
         </div>
       );
     });
@@ -33,7 +34,7 @@ class Home extends React.Component {
     let { signedIn, signUp } = this.state;
     let location = this.props.history.location;
     let username = "";
-
+    console.log("refreshed");
     // Check for sign up values
     if (location) {
       if (location.state) {
@@ -47,6 +48,7 @@ class Home extends React.Component {
           <b>
             <i>{username}</i>
           </b>
+          <div>Shopping cart: {this.props.selectedItem}</div>
           <br></br>
           <br></br>
           {this.renderListOfItems()}
@@ -81,7 +83,14 @@ class Home extends React.Component {
 // inorder to configure connect to ask Provider for data in
 // store
 const mapStateToProps = state => {
-  return { items: state.items, username: state.users };
+  console.log(state);
+  return {
+    items: state.items,
+    username: state.users,
+    selectedItem: state.selectedItem
+  };
 };
 
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps, {
+  addedItem
+})(Home);

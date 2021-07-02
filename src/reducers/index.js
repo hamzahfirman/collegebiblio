@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-
+// let currCount = 0;
 const itemsReducer = () => {
   return [
     { brand: "Nike", color: "Red", size: "10" },
@@ -16,11 +16,19 @@ const newUsersReducer = (listOfUsers = [], action) => {
   return listOfUsers;
 };
 
-// const selectedItem = () => {}
+const selectedItem = (currCount = 0, action) => {
+  if (action.type === "ADD_ITEM") {
+    return currCount + action.payload;
+  }
+
+  return currCount;
+};
+
 // Notes:
 // Each key holds the return values from its
 // associated reducers
 export default combineReducers({
   users: newUsersReducer,
-  items: itemsReducer
+  items: itemsReducer,
+  selectedItem: selectedItem
 });
