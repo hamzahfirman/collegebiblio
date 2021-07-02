@@ -2,10 +2,10 @@ import { combineReducers } from "redux";
 
 const itemsReducer = () => {
   return [
-    { item: "Nike", color: "Red", size: "10" },
-    { item: "Adidas", color: "Red", size: "12" },
-    { item: "Crocs", color: "Blue", size: "13" },
-    { item: "Nike", color: "Yellow", size: "11" }
+    { brand: "Nike", color: "Red", size: "10" },
+    { brand: "Adidas", color: "Red", size: "12" },
+    { brand: "Crocs", color: "Blue", size: "13" },
+    { brand: "Nike", color: "Yellow", size: "11" }
   ];
 };
 
@@ -20,5 +20,5 @@ const newUsersReducer = (listOfUsers = [], action) => {
 
 export default combineReducers({
   users: newUsersReducer,
-  iterms: itemsReducer
+  items: itemsReducer
 });

@@ -1,8 +1,9 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 import { Link, Redirect } from "react-router-dom";
-import "./css/Home.css";
+import { connect } from "react-redux";
 
+import "./css/Home.css";
 import ShippingAdd from "./forms/ShippingAdd";
 
 class Home extends React.Component {
@@ -12,6 +13,17 @@ class Home extends React.Component {
       signUp: false
     };
   }
+  renderListOfItems() {
+    return this.props.items.map(item => {
+      return (
+        <div>
+          {item.brand}, {item.color}, {item.size}
+          <button>Select</button>
+        </div>
+      );
+    });
+  }
+
   //Event Handlers
   handleOnClickSignUp = () => {
     this.setState({ signUp: true });
@@ -22,6 +34,7 @@ class Home extends React.Component {
     let location = this.props.history.location;
     let username = "";
 
+    console.log(this.props.items);
     // Check for sign up values
     if (location) {
       if (location.state) {
@@ -35,7 +48,9 @@ class Home extends React.Component {
           <b>
             <i>{username}</i>
           </b>
-          <ShippingAdd />
+          <br></br>
+          <br></br>
+          {this.renderListOfItems()}
         </div>
       );
     }
@@ -62,5 +77,12 @@ class Home extends React.Component {
     );
   }
 }
+// Notes:
+// 'mapStateToProps' gets passed to connect as its first arg
+// inorder to configure connect to ask Provider for data in
+// store
+const mapStateToProps = state => {
+  return { items: state.items };
+};
 
-export default Home;
+export default connect(mapStateToProps)(Home);
