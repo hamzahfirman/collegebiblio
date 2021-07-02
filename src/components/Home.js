@@ -34,7 +34,7 @@ class Home extends React.Component {
     let { signedIn, signUp } = this.state;
     let location = this.props.history.location;
     let username = "";
-    console.log("refreshed");
+
     // Check for sign up values
     if (location) {
       if (location.state) {
@@ -83,7 +83,6 @@ class Home extends React.Component {
 // inorder to configure connect to ask Provider for data in
 // store
 const mapStateToProps = state => {
-  console.log(state);
   return {
     items: state.items,
     username: state.users,
