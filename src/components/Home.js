@@ -4,7 +4,7 @@ import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
 import "./css/Home.css";
-import { addedItem, currUser } from "../actions";
+import { addedItem, currUser, logOutUser } from "../actions";
 
 class Home extends React.Component {
   constructor(props) {
@@ -29,6 +29,10 @@ class Home extends React.Component {
     this.setState({ signUp: true });
   };
 
+  handleOnClickLogOut = () => {
+    this.props.logOutUser();
+    this.props.history.push({ pathname: "/" });
+  };
   handleOnClickCheckout = () => {
     this.props.history.push({ pathname: "/shipping-add" });
   };
@@ -45,18 +49,17 @@ class Home extends React.Component {
 
   render() {
     let { signUp } = this.state;
-    let location = this.props.history.location;
-    let user = this.props.username;
+    let location = this.props.history.location.state;
+    let user = this.props.user;
     let username = "";
 
     // Check for sign up values
     if (location) {
-      if (location.state) {
-        username = location.state.username;
-      } else if (user.username) {
-        username = user.username;
-      }
+      username = location.username;
+    } else if (user.username) {
+      username = user.username;
     }
+
     if (username) {
       return (
         <div>
@@ -71,6 +74,7 @@ class Home extends React.Component {
           <br></br>
           <br></br>
           {this.renderListOfItems()}
+          <Button onClick={this.handleOnClickLogOut}>Log out</Button>
         </div>
       );
     }
@@ -111,5 +115,6 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps, {
   addedItem,
-  currUser
+  currUser,
+  logOutUser
 })(Home);

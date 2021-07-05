@@ -16,10 +16,12 @@ const itemsReducer = () => {
 //   }
 //   return listOfUsers;
 // };
-const newUsersReducer = (listOfUsers = {}, action) => {
+const userLoginReducer = (listOfUsers = {}, action) => {
   if (action.type === "SIGNED_IN") {
     listOfUsers = action.payload;
     return listOfUsers;
+  } else if (action.type === "LOG_OUT") {
+    listOfUsers = action.payload;
   }
 
   return listOfUsers;
@@ -37,7 +39,7 @@ const selectedItem = (currCount = 0, action) => {
 // Each key holds the return values from its
 // associated reducers
 export default combineReducers({
-  user: newUsersReducer,
+  user: userLoginReducer,
   items: itemsReducer,
   selectedItem: selectedItem
 });

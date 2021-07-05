@@ -7,6 +7,13 @@ export const currUser = loginInfo => {
   };
 };
 
+export const logOutUser = () => {
+  return {
+    type: "LOG_OUT",
+    payload: {}
+  };
+};
+
 export const addedItem = increment => {
   return {
     type: "ADD_ITEM",

@@ -150,7 +150,7 @@ const ShippingAdd = props => {
 const mapStateToProps = state => {
   return {
     items: state.items,
-    user: state.users,
+    user: state.user,
     selectedItem: state.selectedItem
   };
 };
