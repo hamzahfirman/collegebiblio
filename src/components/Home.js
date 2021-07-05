@@ -46,12 +46,15 @@ class Home extends React.Component {
   render() {
     let { signUp } = this.state;
     let location = this.props.history.location;
+    let user = this.props.username;
     let username = "";
 
     // Check for sign up values
     if (location) {
       if (location.state) {
         username = location.state.username;
+      } else if (user.username) {
+        username = user.username;
       }
     }
     if (username) {
@@ -101,7 +104,7 @@ class Home extends React.Component {
 const mapStateToProps = state => {
   return {
     items: state.items,
-    username: state.users,
+    user: state.user,
     selectedItem: state.selectedItem
   };
 };

@@ -50,84 +50,97 @@ const ShippingAdd = props => {
   return (
     <div className="shippingForm">
       <form onSubmit={formik.handleSubmit}>
-        <div className="names">
-          <TextField
-            id="firstName"
-            name="firstName"
-            label="First Name"
-            variant="outlined"
-            value={formik.values.firstName}
-            onChange={formik.handleChange}
-            error={formik.touched.firstName && formik.errors.firstName}
-            helperText={formik.touched.firstName && formik.errors.firstName}
-          />
-          <TextField
-            id="lastName"
-            name="lastName"
-            label="Last Name"
-            variant="outlined"
-            value={formik.values.lastName}
-            onChange={formik.handleChange}
-            error={formik.touched.lastName && formik.errors.lastName}
-            helperText={formik.touched.lastName && formik.errors.lastName}
-          />
-        </div>
-        <div className="address">
-          <TextField
-            id="address"
-            name="address"
-            label="Address"
-            variant="outlined"
-            value={formik.values.address}
-            onChange={formik.handleChange}
-            error={formik.touched.address && formik.errors.address}
-            helperText={formik.touched.address && formik.errors.address}
-          />
-        </div>
-        <div className="email">
-          <TextField
-            id="email"
-            name="email"
-            label="Email"
-            variant="outlined"
-            value={formik.values.email}
-            onChange={formik.handleChange}
-            error={formik.touched.email && formik.errors.email}
-            helperText={formik.touched.email && formik.errors.email}
-          />
-        </div>
-        <div className="payment">
-          <Select
-            id="paymentMethod"
-            name="paymentMethod"
-            onChange={formik.handleChange}
-            error={formik.touched.paymentMethod && formik.errors.paymentMethod}
-            helperText={
-              formik.touched.paymentMethod && formik.errors.paymentMethod
-            }
-          >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value="amex">American Express</MenuItem>
-            <MenuItem value="visa">Visa</MenuItem>
-            <MenuItem value="mastercard">Mastercard</MenuItem>
-          </Select>
-          <TextField
-            id="cardNumber"
-            name="cardNumber"
-            label="Card Number"
-            variant="outlined"
-            value={formik.values.cardNumber}
-            onChange={formik.handleChange}
-            error={formik.touched.cardNumber && formik.errors.cardNumber}
-            helperText={formik.touched.cardNumber && formik.errors.cardNumber}
-          />
-        </div>
+        <div className="queries">
+          <div className="names">
+            <TextField
+              id="firstName"
+              name="firstName"
+              label="First Name"
+              variant="outlined"
+              value={formik.values.firstName}
+              onChange={formik.handleChange}
+              error={formik.touched.firstName && formik.errors.firstName}
+              helperText={formik.touched.firstName && formik.errors.firstName}
+            />
+            <TextField
+              id="lastName"
+              name="lastName"
+              label="Last Name"
+              variant="outlined"
+              value={formik.values.lastName}
+              onChange={formik.handleChange}
+              error={formik.touched.lastName && formik.errors.lastName}
+              helperText={formik.touched.lastName && formik.errors.lastName}
+            />
+          </div>
+          <div className="address">
+            <TextField
+              id="address"
+              name="address"
+              label="Address"
+              variant="outlined"
+              value={formik.values.address}
+              onChange={formik.handleChange}
+              error={formik.touched.address && formik.errors.address}
+              helperText={formik.touched.address && formik.errors.address}
+            />
+          </div>
+          <div className="email">
+            <TextField
+              id="email"
+              name="email"
+              label="Email"
+              variant="outlined"
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              error={formik.touched.email && formik.errors.email}
+              helperText={formik.touched.email && formik.errors.email}
+            />
+          </div>
+          <div className="payment">
+            <Select
+              id="paymentMethod"
+              name="paymentMethod"
+              onChange={formik.handleChange}
+              error={
+                formik.touched.paymentMethod && formik.errors.paymentMethod
+              }
+              helperText={
+                formik.touched.paymentMethod && formik.errors.paymentMethod
+              }
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value="amex">American Express</MenuItem>
+              <MenuItem value="visa">Visa</MenuItem>
+              <MenuItem value="mastercard">Mastercard</MenuItem>
+            </Select>
+            <TextField
+              id="cardNumber"
+              name="cardNumber"
+              label="Card Number"
+              variant="outlined"
+              value={formik.values.cardNumber}
+              onChange={formik.handleChange}
+              error={formik.touched.cardNumber && formik.errors.cardNumber}
+              helperText={formik.touched.cardNumber && formik.errors.cardNumber}
+            />
+          </div>
 
-        <br></br>
+          <br></br>
+        </div>
         <Button color="primary" variant="contained" type="submit">
           Submit
+        </Button>
+        <Button
+          color="primary"
+          variant="contained"
+          onClick={() => {
+            props.history.push({ pathname: "/" });
+          }}
+        >
+          Go Back
         </Button>
       </form>
     </div>

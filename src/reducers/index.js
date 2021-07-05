@@ -37,7 +37,7 @@ const selectedItem = (currCount = 0, action) => {
 // Each key holds the return values from its
 // associated reducers
 export default combineReducers({
-  users: newUsersReducer,
+  user: newUsersReducer,
   items: itemsReducer,
   selectedItem: selectedItem
 });
