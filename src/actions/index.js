@@ -20,3 +20,10 @@ export const addedItem = increment => {
     payload: increment
   };
 };
+
+export const deletedItem = decrement => {
+  return {
+    type: "DELETE_ITEM",
+    payload: decrement
+  };
+};

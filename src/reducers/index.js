@@ -36,6 +36,14 @@ const selectedItem = (currCount = 0, action) => {
     currItem[0].quantity += action.payload.increment;
 
     return currCount + action.payload.increment;
+  } else if (action.type === "DELETE_ITEM" && currCount >= 0) {
+    // Delete based on their type
+    let selected = action.payload.item.brand;
+    let currItem = ALLSALEITEMS.filter(item => item.brand === selected);
+    if (currItem[0].quantity > 0) {
+      currItem[0].quantity -= action.payload.increment;
+      return currCount - action.payload.increment;
+    }
   }
 
   return currCount;

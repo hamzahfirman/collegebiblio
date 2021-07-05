@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 
 import "./css/Home.css";
 import ShoppingCart from "./ShoppingCart";
-import { addedItem, currUser, logOutUser } from "../actions";
+import { deletedItem, addedItem, currUser, logOutUser } from "../actions";
 
 class Home extends React.Component {
   constructor(props) {
@@ -24,6 +24,11 @@ class Home extends React.Component {
             onClick={() => this.props.addedItem({ increment: 1, item: item })}
           >
             Add
+          </button>
+          <button
+            onClick={() => this.props.deletedItem({ increment: 1, item: item })}
+          >
+            Delete
           </button>
         </div>
       );
@@ -122,6 +127,7 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, {
+  deletedItem,
   addedItem,
   currUser,
   logOutUser
