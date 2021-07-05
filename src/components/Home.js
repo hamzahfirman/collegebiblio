@@ -4,6 +4,7 @@ import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
 import "./css/Home.css";
+import ShoppingCart from "./ShoppingCart";
 import { addedItem, currUser, logOutUser } from "../actions";
 
 class Home extends React.Component {
@@ -13,12 +14,17 @@ class Home extends React.Component {
       signUp: false
     };
   }
+
   renderListOfItems() {
     return this.props.items.map(item => {
       return (
         <div>
-          {item.brand}, {item.color}, {item.size}
-          <button onClick={() => this.props.addedItem(1)}>Select</button>
+          {item.brand}, {item.flavor}, {item.quantity}
+          <button
+            onClick={() => this.props.addedItem({ increment: 1, item: item })}
+          >
+            Add
+          </button>
         </div>
       );
     });
@@ -68,8 +74,10 @@ class Home extends React.Component {
             <i>{username}</i>
           </b>
           <div>
-            Shopping cart: {this.props.selectedItem}
-            <button onClick={this.handleOnClickCheckout}>Checkout</button>
+            <ShoppingCart
+              selectedItems={this.props.selectedItem}
+              checkout={this.handleOnClickCheckout}
+            />
           </div>
           <br></br>
           <br></br>
