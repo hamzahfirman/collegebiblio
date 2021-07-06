@@ -27,3 +27,17 @@ export const deletedItem = decrement => {
     payload: decrement
   };
 };
+
+export const addedCost = increment => {
+  return {
+    type: "ADD_COST",
+    payload: increment
+  };
+};
+
+export const takeAwayCost = decrement => {
+  return {
+    type: "TAKE_AWAY_COST",
+    payload: decrement
+  };
+};

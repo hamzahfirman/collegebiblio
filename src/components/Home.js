@@ -5,7 +5,14 @@ import { connect } from "react-redux";
 
 import "./css/Home.css";
 import ShoppingCart from "./ShoppingCart";
-import { deletedItem, addedItem, currUser, logOutUser } from "../actions";
+import {
+  takeAwayCost,
+  addedCost,
+  deletedItem,
+  addedItem,
+  currUser,
+  logOutUser
+} from "../actions";
 
 class Home extends React.Component {
   constructor(props) {
@@ -19,14 +26,11 @@ class Home extends React.Component {
     return this.props.items.map(item => {
       return (
         <div>
-          {item.brand}, {item.flavor}, {item.quantity}
+          {item.brand}, {item.flavor}, {item.quantity}, ${item.cost}
+          <button onClick={() => this.handleOnClickAddCost(item)}>Add</button>
           <button
-            onClick={() => this.props.addedItem({ increment: 1, item: item })}
-          >
-            Add
-          </button>
-          <button
-            onClick={() => this.props.deletedItem({ increment: 1, item: item })}
+            disabled={item.quantity == 0}
+            onClick={() => this.handleOnClickTakeAwayCost(item)}
           >
             Delete
           </button>
@@ -46,6 +50,14 @@ class Home extends React.Component {
   };
   handleOnClickCheckout = () => {
     this.props.history.push({ pathname: "/shipping-add" });
+  };
+  handleOnClickAddCost = currItem => {
+    this.props.addedItem({ increment: 1, item: currItem });
+    this.props.addedCost(currItem.cost);
+  };
+  handleOnClickTakeAwayCost = currItem => {
+    this.props.deletedItem({ increment: 1, item: currItem });
+    this.props.takeAwayCost(currItem.cost);
   };
 
   componentDidMount() {
@@ -82,6 +94,7 @@ class Home extends React.Component {
             <ShoppingCart
               selectedItems={this.props.selectedItem}
               checkout={this.handleOnClickCheckout}
+              totalCost={this.props.totalCost}
             />
           </div>
           <br></br>
@@ -122,7 +135,8 @@ const mapStateToProps = state => {
   return {
     items: state.items,
     user: state.user,
-    selectedItem: state.selectedItem
+    selectedItem: state.selectedItem,
+    totalCost: state.currentCost
   };
 };
 
@@ -130,5 +144,7 @@ export default connect(mapStateToProps, {
   deletedItem,
   addedItem,
   currUser,
-  logOutUser
+  logOutUser,
+  addedCost,
+  takeAwayCost
 })(Home);

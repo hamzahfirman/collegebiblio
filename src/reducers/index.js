@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
 
 const ALLSALEITEMS = [
-  { brand: "doritos", flavor: "Ranch", quantity: 0 },
-  { brand: "kitkat", flavor: "Green Tea", quantity: 0 },
-  { brand: "cocacola", flavor: "Original", quantity: 0 }
+  { brand: "doritos", flavor: "Ranch", quantity: 0, cost: 2.55 },
+  { brand: "kitkat", flavor: "Green Tea", quantity: 0, cost: 1.26 },
+  { brand: "cocacola", flavor: "Original", quantity: 0, cost: 7.88 }
 ];
 // let currCount = 0;
 const itemsReducer = (items = ALLSALEITEMS) => {
@@ -49,11 +49,22 @@ const selectedItem = (currCount = 0, action) => {
   return currCount;
 };
 
+const editCost = (orderCost = 0, action) => {
+  if (action.type === "ADD_COST") {
+    return orderCost + action.payload;
+  } else if (action.type === "TAKE_AWAY_COST" && orderCost >= 0) {
+    return orderCost - action.payload;
+  }
+
+  return orderCost;
+};
+
 // Notes:
 // Each key holds the return values from its
 // associated reducers
 export default combineReducers({
   user: userLoginReducer,
   items: itemsReducer,
-  selectedItem: selectedItem
+  selectedItem: selectedItem,
+  currentCost: editCost
 });
