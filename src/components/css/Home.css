@@ -1,6 +1,11 @@
-#signIn {
-  color: white;
-  margin-right: 10px;
+.loginButtons {
+  margin-left: 340px;
+  margin-top: 140px;
+  text-align: center;
+  padding-top: 5px;
+  height: 110px;
+  width: 200px;
+  background-color: #88a2bc;
 }
 .headerHome {
   text-align: center;
@@ -11,4 +16,8 @@
   margin-left: 30px;
   width: 150px;
   border-style: groove;
+}
+#signIn {
+  color: white;
+  margin-right: 10px;
 }

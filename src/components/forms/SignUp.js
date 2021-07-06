@@ -3,9 +3,16 @@ import ReactDOM from "react-dom";
 import { Formik, Form, useField } from "formik";
 import * as Yup from "yup";
 import { connect } from "react-redux";
+import {
+  InputLabel,
+  Select,
+  MenuItem,
+  Button,
+  TextField
+} from "@material-ui/core";
 
 import { currUser } from "../../actions";
-
+import "../css/SignUp.css";
 // Notes:
 // connect()(signUp) is equal to:
 // function connect() {
@@ -23,14 +30,17 @@ const MyTextInput = ({ label, ...props }) => {
   const [field, meta] = useField(props);
 
   return (
-    <div>
-      <label htmlFor={props.id || props.name}>{label}</label>
-
-      <input className="text-input" {...field} {...props} />
-
-      {meta.touched && meta.error ? (
-        <div className="error">{meta.error}</div>
-      ) : null}
+    <div className="textField">
+      <TextField
+        htmlFor={props.id || props.name}
+        label={label}
+        variant="outlined"
+        className="text-input"
+        error={meta.touched && meta.error ? meta.error : null}
+        helperText={meta.touched && meta.error ? meta.error : null}
+        {...field}
+        {...props}
+      />
     </div>
   );
 };
@@ -85,7 +95,11 @@ class Signup extends React.Component {
   render() {
     return (
       <div>
-        <h1>You Are One Step Away!</h1>
+        <div className="formTitle">
+          {" "}
+          <h3 id="h3">Sign up</h3>
+          <hr id="hr"></hr>
+        </div>
 
         <Formik
           initialValues={{
@@ -94,8 +108,7 @@ class Signup extends React.Component {
             username: "",
             email: "",
             password: "",
-            acceptedTerms: false, // added for our checkbox
-            jobType: "" // added for our select
+            acceptedTerms: false // added for our checkbox
           }}
           validationSchema={Yup.object({
             firstName: Yup.string()
@@ -127,53 +140,58 @@ class Signup extends React.Component {
 
               .required("Required")
 
-              .oneOf([true], "You must accept the terms and conditions."),
-
-            jobType: Yup.string()
-
-              .oneOf(
-                ["designer", "development", "product", "other"],
-
-                "Invalid Job Type"
-              )
-
-              .required("Required")
+              .oneOf([true], "You must accept the terms and conditions.")
           })}
           onSubmit={values => {
             this.props.history.push({ pathname: "/", state: values });
           }}
         >
           <Form>
-            <MyTextInput label="First Name" name="firstName" type="text" />
-            <MyTextInput label="Last Name" name="lastName" type="text" />
-            <MyTextInput label="Username" name="username" type="text" />
+            <div className="form">
+              <MyTextInput
+                id="firstName"
+                label="First Name"
+                name="firstName"
+                type="text"
+              />
+              <MyTextInput
+                id="lastName"
+                label="Last Name"
+                name="lastName"
+                type="text"
+              />
+              <MyTextInput
+                id="username"
+                label="Username"
+                name="username"
+                type="text"
+              />
 
-            <MyTextInput
-              label="Email Address"
-              name="email"
-              type="email"
-              placeholder="jane@formik.com"
-            />
+              <MyTextInput
+                id="email"
+                label="Email Address"
+                name="email"
+                type="email"
+                placeholder="jane@formik.com"
+              />
 
-            <MyTextInput label="Password" name="password" type="password" />
+              <MyTextInput
+                id="password"
+                label="Password"
+                name="password"
+                type="password"
+              />
 
-            <MySelect label="Job Type" name="jobType">
-              <option value="">Select a job type</option>
-
-              <option value="designer">Designer</option>
-
-              <option value="development">Developer</option>
-
-              <option value="product">Product Manager</option>
-
-              <option value="other">Other</option>
-            </MySelect>
-
-            <MyCheckbox name="acceptedTerms">
-              I accept the terms and conditions
-            </MyCheckbox>
-
-            <button type="submit">Submit</button>
+              <MyCheckbox name="acceptedTerms">
+                &nbsp; I accept the terms and conditions
+              </MyCheckbox>
+            </div>
+            <div id="button">
+              {" "}
+              <Button color="primary" variant="contained" type="submit">
+                Submit
+              </Button>
+            </div>
           </Form>
         </Formik>
       </div>
@@ -189,3 +207,15 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, {
   currUser
 })(Signup);
+
+// <MySelect label="Job Type" name="jobType">
+// <option value="">Select a job type</option>
+
+// <option value="designer">Designer</option>
+
+// <option value="development">Developer</option>
+
+// <option value="product">Product Manager</option>
+
+// <option value="other">Other</option>
+// </MySelect>

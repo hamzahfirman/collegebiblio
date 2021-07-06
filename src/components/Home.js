@@ -124,8 +124,9 @@ class Home extends React.Component {
     }
     return (
       <div>
-        New?
         <div className="loginButtons">
+          New?
+          <br></br>
           <Button
             variant="dark"
             size="sm"
@@ -134,6 +135,9 @@ class Home extends React.Component {
           >
             Sign up
           </Button>
+          <br></br>
+          Already a member?
+          <br></br>
           <Button variant="dark" size="sm" id="signIn">
             Log in
           </Button>
