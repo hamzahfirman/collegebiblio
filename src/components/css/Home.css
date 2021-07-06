@@ -1,4 +1,14 @@
 #signIn {
-    color: white;
-    margin-right: 10px;
+  color: white;
+  margin-right: 10px;
+}
+.headerHome {
+  text-align: center;
+  margin-top: 10px;
+}
+.shoppingCart {
+  margin-top: 40px;
+  margin-left: 30px;
+  width: 150px;
+  border-style: groove;
 }

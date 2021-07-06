@@ -26,8 +26,34 @@ const validationSchema = yup.object({
     .string("Enter your email")
     .email("Enter a valid email")
     .required("Required"),
+  phone: yup
+    .string("Enter your phone")
+    .max(10, "Must be 10 digits")
+    .min(10, "Must be 10 digits")
+    .required("Required"),
   paymentMethod: yup.string("Select your payment method").required("Required"),
-  cardNumber: yup.string("Select your payment method").required("Required")
+  cardMonth: yup.string("Select your payment method").required("Required"),
+  cardYear: yup.string("Select your payment method").required("Required"),
+  cardNumber: yup
+    .string("Select your payment method")
+    .max(16, "Must be 16 digits")
+    .min(16, "Must be 16 digits")
+    .required("Required"),
+  cvvNumber: yup
+    .string("Select your payment method")
+    .max(3, "Must be 3 digits")
+    .min(3, "Must be 3 digits")
+    .required("Required"),
+  cardMonth: yup
+    .string("Select your payment method")
+    .max(2, "Must be 2 digits")
+    .min(2, "Must be 2 digits")
+    .required("Required"),
+  cardYear: yup
+    .string("Select your payment method")
+    .max(4, "Must be 4 digits")
+    .min(4, "Must be 4 digits")
+    .required("Required")
 });
 
 const ShippingAdd = props => {
@@ -37,8 +63,12 @@ const ShippingAdd = props => {
       lastName: props.user.lastName,
       address: "",
       email: props.user.email,
+      phone: "",
       paymentMethod: "",
-      cardNumber: ""
+      cardNumber: "",
+      cvvNumber: "",
+      cardMonth: "",
+      cardYear: ""
     },
     validationSchema: validationSchema,
     onSubmit: values => {
@@ -48,6 +78,13 @@ const ShippingAdd = props => {
 
   return (
     <div className="shippingForm">
+      <div className="formTitle">
+        {" "}
+        <h3>Shipping Address & Payment Method</h3>
+        <h8>FREE SHIPPING</h8>
+        <hr></hr>
+      </div>
+
       <form onSubmit={formik.handleSubmit}>
         <div className="queries">
           <div className="names">
@@ -90,57 +127,127 @@ const ShippingAdd = props => {
               name="email"
               label="Email"
               variant="outlined"
+              placeholder="example@example.com"
               value={formik.values.email}
               onChange={formik.handleChange}
               error={formik.touched.email && formik.errors.email}
               helperText={formik.touched.email && formik.errors.email}
             />
+            <TextField
+              id="phone"
+              name="phone"
+              label="Phone"
+              variant="outlined"
+              placeholder="xxx-xxx-xxxx"
+              value={formik.values.phone}
+              onChange={formik.handleChange}
+              error={formik.touched.phone && formik.errors.phone}
+              helperText={formik.touched.phone && formik.errors.phone}
+            />
           </div>
           <div className="payment">
-            <Select
-              id="paymentMethod"
-              name="paymentMethod"
-              onChange={formik.handleChange}
-              error={
-                formik.touched.paymentMethod && formik.errors.paymentMethod
-              }
-              helperText={
-                formik.touched.paymentMethod && formik.errors.paymentMethod
-              }
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value="amex">American Express</MenuItem>
-              <MenuItem value="visa">Visa</MenuItem>
-              <MenuItem value="mastercard">Mastercard</MenuItem>
-            </Select>
-            <TextField
-              id="cardNumber"
-              name="cardNumber"
-              label="Card Number"
-              variant="outlined"
-              value={formik.values.cardNumber}
-              onChange={formik.handleChange}
-              error={formik.touched.cardNumber && formik.errors.cardNumber}
-              helperText={formik.touched.cardNumber && formik.errors.cardNumber}
-            />
+            <div className="paymentMethod">
+              <InputLabel id="demo-simple-select-helper-label">
+                Payment Method
+              </InputLabel>
+              <Select
+                id="paymentMethod"
+                name="paymentMethod"
+                onChange={formik.handleChange}
+                error={
+                  formik.touched.paymentMethod && formik.errors.paymentMethod
+                }
+                helperText={
+                  formik.touched.paymentMethod && formik.errors.paymentMethod
+                }
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                <MenuItem value="amex">American Express</MenuItem>
+                <MenuItem value="visa">Visa</MenuItem>
+                <MenuItem value="mastercard">Mastercard</MenuItem>
+              </Select>
+            </div>
+            <div className="cardDetails">
+              {" "}
+              <TextField
+                id="cardNumber"
+                name="cardNumber"
+                label="Card Number"
+                variant="outlined"
+                value={formik.values.cardNumber}
+                onChange={formik.handleChange}
+                error={formik.touched.cardNumber && formik.errors.cardNumber}
+                helperText={
+                  formik.touched.cardNumber && formik.errors.cardNumber
+                }
+              />
+              <div className="cardExpiration">
+                <TextField
+                  id="cardMonth"
+                  name="cardMonth"
+                  label="Month"
+                  variant="outlined"
+                  placeholder="xx"
+                  value={formik.values.cardMonth}
+                  onChange={formik.handleChange}
+                  error={formik.touched.cardMonth && formik.errors.cardMonth}
+                  helperText={
+                    formik.touched.cardMonth && formik.errors.cardMonth
+                  }
+                />
+
+                <TextField
+                  id="cardYear"
+                  name="cardYear"
+                  label="Year"
+                  variant="outlined"
+                  placeholder="xxxx"
+                  value={formik.values.cardYear}
+                  onChange={formik.handleChange}
+                  error={formik.touched.cardYear && formik.errors.cardYear}
+                  helperText={formik.touched.cardYear && formik.errors.cardYear}
+                />
+              </div>
+              <div className="cvvNumber">
+                {" "}
+                <TextField
+                  id="cvvNumber"
+                  name="cvvNumber"
+                  label="CVV #"
+                  variant="outlined"
+                  placeholder="xxx"
+                  value={formik.values.cvvNumber}
+                  onChange={formik.handleChange}
+                  error={formik.touched.cvvNumber && formik.errors.cvvNumber}
+                  helperText={
+                    formik.touched.cvvNumber && formik.errors.cvvNumber
+                  }
+                />
+                <br></br>
+                <b id="totalCost">Total Cost: ${props.totalCost}</b>
+              </div>
+            </div>
           </div>
 
           <br></br>
         </div>
-        <Button color="primary" variant="contained" type="submit">
-          Submit
-        </Button>
-        <Button
-          color="primary"
-          variant="contained"
-          onClick={() => {
-            props.history.push({ pathname: "/" });
-          }}
-        >
-          Go Back
-        </Button>
+        <div className="buttons">
+          <Button
+            id="goBack"
+            color="primary"
+            variant="contained"
+            onClick={() => {
+              props.history.push({ pathname: "/" });
+            }}
+          >
+            Go Back
+          </Button>
+          <Button id="submit" color="primary" variant="contained" type="submit">
+            Place My Order
+          </Button>
+        </div>
       </form>
     </div>
   );
@@ -150,7 +257,8 @@ const mapStateToProps = state => {
   return {
     items: state.items,
     user: state.user,
-    selectedItem: state.selectedItem
+    selectedItem: state.selectedItem,
+    totalCost: state.currentCost
   };
 };
 

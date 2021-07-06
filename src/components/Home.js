@@ -27,13 +27,21 @@ class Home extends React.Component {
       return (
         <div>
           {item.brand}, {item.flavor}, {item.quantity}, ${item.cost}
-          <button onClick={() => this.handleOnClickAddCost(item)}>Add</button>
-          <button
+          <Button
+            variant="primary"
+            size="sm"
+            onClick={() => this.handleOnClickAddCost(item)}
+          >
+            Add
+          </Button>
+          <Button
+            variant="secondary"
+            size="sm"
             disabled={item.quantity == 0}
             onClick={() => this.handleOnClickTakeAwayCost(item)}
           >
             Delete
-          </button>
+          </Button>
         </div>
       );
     });
@@ -86,11 +94,16 @@ class Home extends React.Component {
     if (username) {
       return (
         <div>
-          Shop away{" "}
-          <b>
-            <i>{username}</i>
-          </b>
-          <div>
+          <div className="headerHome">
+            {" "}
+            <h3>QuickSnack</h3>
+            Shop away
+            <b>
+              <i> {username}!</i>
+            </b>
+          </div>
+
+          <div className="shoppingCart">
             <ShoppingCart
               selectedItems={this.props.selectedItem}
               checkout={this.handleOnClickCheckout}
@@ -100,7 +113,9 @@ class Home extends React.Component {
           <br></br>
           <br></br>
           {this.renderListOfItems()}
-          <Button onClick={this.handleOnClickLogOut}>Log out</Button>
+          <Button variant="dark" size="sm" onClick={this.handleOnClickLogOut}>
+            Log out
+          </Button>
         </div>
       );
     }

@@ -1,5 +1,71 @@
+hr {
+  width: 450px;
+  background-color: blue;
+}
+h3 {
+  margin-left: 60px;
+}
+h8 {
+  margin-left: 60px;
+  color: darkorange;
+}
+.formTitle {
+  margin-top: 10px;
+}
 .queries {
   background-color: lightgray;
-  width: 400px;
+  width: 450px;
   margin: auto;
+  margin-top: 20px;
+  text-align: center;
+  padding-top: 10px;
+}
+.buttons {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.names {
+  margin-top: 10px;
+}
+.address {
+  margin-top: 10px;
+}
+.email {
+  margin-top: 10px;
+}
+.payment {
+  margin-top: 10px;
+}
+.cardDetails {
+  margin-top: 10px;
+}
+.cardExpiration {
+  margin-top: 10px;
+}
+.cvvNumber {
+  margin-top: 10px;
+}
+#paymentMethod {
+  width: 150px;
+}
+#submit {
+  margin-left: 20px;
+}
+#address {
+  width: 315px;
+  padding-top: 20px;
+}
+#cvvNumber {
+  width: 70px;
+}
+#cardMonth {
+  width: 50px;
+}
+#cardYear {
+  width: 50px;
+}
+
+#totalCost {
+  margin-left: 300px;
 }
