@@ -143,7 +143,7 @@ class Signup extends React.Component {
               .oneOf([true], "You must accept the terms and conditions.")
           })}
           onSubmit={values => {
-            this.props.history.push({ pathname: "/", state: values });
+            // this.props.history.push({ pathname: "/", state: values });
           }}
         >
           <Form>
@@ -172,7 +172,7 @@ class Signup extends React.Component {
                 label="Email Address"
                 name="email"
                 type="email"
-                placeholder="jane@formik.com"
+                placeholder="example@example.com"
               />
 
               <MyTextInput
@@ -199,7 +199,7 @@ class Signup extends React.Component {
   }
 }
 // Notes:
-// 'connect' helps to call actions and puts into dispatch functions
+// 'connect' helps to call actions and puts into  functions
 const mapStateToProps = state => {
   return { items: state.items };
 };

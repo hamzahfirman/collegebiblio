@@ -11,6 +11,7 @@ import {
 import { connect } from "react-redux";
 
 import "../css/ShippingAdd.css";
+import { orderPlaced } from "../../actions";
 
 const validationSchema = yup.object({
   firstName: yup
@@ -72,7 +73,9 @@ const ShippingAdd = props => {
     },
     validationSchema: validationSchema,
     onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
+      props.orderPlaced();
+      alert("Thank you for shopping!");
+      props.history.push({ pathname: "/" });
     }
   });
 
@@ -226,7 +229,9 @@ const ShippingAdd = props => {
                   }
                 />
                 <br></br>
-                <b id="totalCost">Total Cost: ${props.totalCost}</b>
+                <b id="totalCost">
+                  Total Cost: ${Math.floor(props.totalCost * 100) / 100}
+                </b>
               </div>
             </div>
           </div>
@@ -262,4 +267,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(ShippingAdd);
+export default connect(mapStateToProps, { orderPlaced })(ShippingAdd);

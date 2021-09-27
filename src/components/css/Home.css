@@ -11,10 +11,23 @@
   text-align: center;
   margin-top: 10px;
 }
+#titleHome {
+  margin-left: 2px;
+}
 .shoppingCart {
   margin-top: 40px;
   margin-left: 30px;
   width: 150px;
+  border-style: groove;
+  background-color: #88a2bc;
+}
+.allItems {
+  background-color: #efb680;
+  width: 200px;
+  margin: auto;
+  text-align: center;
+}
+.singleItem {
   border-style: groove;
 }
 #signIn {

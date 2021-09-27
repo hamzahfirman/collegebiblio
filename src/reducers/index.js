@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
 
 const ALLSALEITEMS = [
-  { brand: "doritos", flavor: "Ranch", quantity: 0, cost: 2.55 },
-  { brand: "kitkat", flavor: "Green Tea", quantity: 0, cost: 1.26 },
-  { brand: "cocacola", flavor: "Original", quantity: 0, cost: 7.88 }
+  { brand: "Ruffles", flavor: "Cheddar & Sour Cream", quantity: 0, cost: 2.55 },
+  { brand: "Kitkat", flavor: "Green Tea", quantity: 0, cost: 1.26 },
+  { brand: "Cocacola", flavor: "Original", quantity: 0, cost: 7.88 }
 ];
 // let currCount = 0;
 const itemsReducer = (items = ALLSALEITEMS) => {
@@ -44,6 +44,9 @@ const selectedItem = (currCount = 0, action) => {
       currItem[0].quantity -= action.payload.increment;
       return currCount - action.payload.increment;
     }
+  } else if (action.type === "PLACED_ORDER") {
+    currCount = 0;
+    return currCount;
   }
 
   return currCount;
@@ -54,6 +57,8 @@ const editCost = (orderCost = 0, action) => {
     return orderCost + action.payload;
   } else if (action.type === "TAKE_AWAY_COST" && orderCost >= 0) {
     return orderCost - action.payload;
+  } else if (action.type === "PLACED_ORDER") {
+    orderCost = 0;
   }
 
   return orderCost;

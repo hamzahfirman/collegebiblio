@@ -41,3 +41,9 @@ export const takeAwayCost = decrement => {
     payload: decrement
   };
 };
+
+export const orderPlaced = () => {
+  return {
+    type: "PLACED_ORDER"
+  };
+};
