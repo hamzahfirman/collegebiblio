@@ -11,6 +11,8 @@ import {
   TextField
 } from "@material-ui/core";
 
+
+import Navbar from "../homepage/home-navbar";
 import { currUser } from "../../actions";
 import "../css/SignUp.css";
 // Notes:
@@ -95,6 +97,7 @@ class Signup extends React.Component {
   render() {
     return (
       <div>
+        <Navbar />
         <div className="formTitle">
           {" "}
           <h3 id="h3">Sign up</h3>
