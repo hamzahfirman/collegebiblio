@@ -96,11 +96,11 @@ class Signup extends React.Component {
   }
   render() {
     return (
-      <div className="signUpForm">
+      <div>
         <Navbar />
         <div className="formTitle">
           {" "}
-          <h3 id="h3">Sign up</h3>
+          <h3 id="h3">Hello Again!</h3>
           <hr id="hr"></hr>
         </div>
 
@@ -114,21 +114,21 @@ class Signup extends React.Component {
             acceptedTerms: false // added for our checkbox
           }}
           validationSchema={Yup.object({
-            firstName: Yup.string()
+            // firstName: Yup.string()
 
-              .max(15, "Must be 15 characters or less")
+            //   .max(15, "Must be 15 characters or less")
 
-              .required("Required"),
-            lastName: Yup.string()
+            //   .required("Required"),
+            // lastName: Yup.string()
 
-              .max(15, "Must be 15 characters or less")
+            //   .max(15, "Must be 15 characters or less")
 
-              .required("Required"),
-            username: Yup.string()
+            //   .required("Required"),
+            // username: Yup.string()
 
-              .max(15, "Must be 15 characters or less")
+            //   .max(15, "Must be 15 characters or less")
 
-              .required("Required"),
+            //   .required("Required"),
 
             password: Yup.string()
 
@@ -137,21 +137,22 @@ class Signup extends React.Component {
               .required("Required"),
             email: Yup.string()
               .email("Invalid email address")
-              .required("Required"),
-
-            acceptedTerms: Yup.boolean()
-
               .required("Required")
+            })}
 
-              .oneOf([true], "You must accept the terms and conditions.")
-          })}
+        //     acceptedTerms: Yup.boolean()
+
+        //       .required("Required")
+
+        //       .oneOf([true], "You must accept the terms and conditions.")
+        //   })}
           onSubmit={values => {
-            // this.props.history.push({ pathname: "/", state: values });
+            this.props.history.push({ pathname: "/", state: values });
           }}
         >
           <Form>
             <div className="form">
-              <MyTextInput
+              {/* <MyTextInput
                 id="firstName"
                 label="First Name"
                 name="firstName"
@@ -168,7 +169,7 @@ class Signup extends React.Component {
                 label="Username"
                 name="username"
                 type="text"
-              />
+              /> */}
 
               <MyTextInput
                 id="email"
@@ -184,15 +185,15 @@ class Signup extends React.Component {
                 name="password"
                 type="password"
               />
-
+{/* 
               <MyCheckbox name="acceptedTerms">
                 &nbsp; I accept the terms and conditions
-              </MyCheckbox>
+              </MyCheckbox> */}
             </div>
             <div id="button">
               {" "}
               <Button color="primary" variant="contained" type="submit">
-                SEND VERIFICATION EMAIL
+              SIGN IN
               </Button>
             </div>
           </Form>

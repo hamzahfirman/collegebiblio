@@ -2,14 +2,15 @@ import React from "react";
 
 import Content from "./home-content";
 import Navbar from "./home-navbar";
-import SignUp from "../forms/SignUp";
+import "./Home.css";
+
 
 export default function Home() {
   return (
-    <div>
+    <div className="homepage">
+    
       <Navbar />
       <Content />
-      <SignUp />
     </div>
   );
 }
