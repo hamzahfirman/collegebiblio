@@ -6,6 +6,8 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { useHistory } from "react-router-dom";
 
+import "./home-navbar.css";
+
 const NavButtons = () => {
   let history = useHistory()
 
@@ -28,9 +30,9 @@ const NavButtons = () => {
 };
 export default function Navbar() {
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
+    <Box  sx={{ flexGrow: 1 }}>
+      <AppBar  position="static">
+        <Toolbar className="homeNavbar">
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             College Biblio
           </Typography>

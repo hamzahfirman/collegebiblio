@@ -10,10 +10,14 @@
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
+.signUpForm {
+  background-color: #F3EDE5;
+}
 .form {
   margin: auto;
   margin-top: 20px;
-  background-color: lightgray;
+
   width: 250px;
   text-align: center;
   padding-top: 10px;
