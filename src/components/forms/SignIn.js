@@ -14,6 +14,7 @@ import {
 
 import Navbar from "../homepage/home-navbar";
 import { currUser } from "../../actions";
+import { findAUser } from "../../serverInterface/server";
 import "../css/SignUp.css";
 // Notes:
 // connect()(signUp) is equal to:
@@ -147,6 +148,7 @@ class Signup extends React.Component {
         //       .oneOf([true], "You must accept the terms and conditions.")
         //   })}
           onSubmit={values => {
+            findAUser(values)
             this.props.history.push({ pathname: "/", state: values });
           }}
         >

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const API = "https://collegebiblioapi.herokuapp.com"
-// const API = "http://localhost:3000";
+// const API = "https://collegebiblioapi.herokuapp.com"
+const API = "http://localhost:3001";
 
 /* A list of functions for fetching data from the database */
 export const pushANewUser = (data) => {
@@ -10,4 +10,12 @@ export const pushANewUser = (data) => {
     API + '/api/users/signup', 
    data
 ) }
+
+export const findAUser = (data) => {
+    axios.post( 
+        API + '/api/users/login', 
+       data
+    )   
+}
+console.log(findAUser.data)
 

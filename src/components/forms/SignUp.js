@@ -142,7 +142,6 @@ class Signup extends React.Component {
           })}
           onSubmit={values => {
             pushANewUser(values)
-            console.log(values)
             this.props.history.push({ pathname: "/", state: values });
           }}
         >
