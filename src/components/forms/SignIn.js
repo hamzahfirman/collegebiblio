@@ -107,9 +107,6 @@ class Signup extends React.Component {
 
         <Formik
           initialValues={{
-            firstName: "",
-            lastName: "",
-            username: "",
             email: "",
             password: "",
             acceptedTerms: false // added for our checkbox
@@ -148,7 +145,6 @@ class Signup extends React.Component {
         //       .oneOf([true], "You must accept the terms and conditions.")
         //   })}
           onSubmit={values => {
-            findAUser(values)
             this.props.history.push({ pathname: "/", state: values });
           }}
         >
