@@ -14,6 +14,7 @@ import {
 
 import Navbar from "../homepage/home-navbar";
 import { currUser } from "../../actions";
+import { pushANewUser } from "../../serverInterface/server";
 import "../css/SignUp.css";
 // Notes:
 // connect()(signUp) is equal to:
@@ -106,27 +107,21 @@ class Signup extends React.Component {
 
         <Formik
           initialValues={{
-            firstName: "",
-            lastName: "",
-            username: "",
+            name: "",
+            phoneNumber: "",
             email: "",
             password: "",
             acceptedTerms: false // added for our checkbox
           }}
           validationSchema={Yup.object({
-            firstName: Yup.string()
+            name: Yup.string()
 
               .max(15, "Must be 15 characters or less")
 
               .required("Required"),
-            lastName: Yup.string()
+            phoneNumber: Yup.string()
 
-              .max(15, "Must be 15 characters or less")
-
-              .required("Required"),
-            username: Yup.string()
-
-              .max(15, "Must be 15 characters or less")
+              .length(10, "Must be 10-digits")
 
               .required("Required"),
 
@@ -146,27 +141,23 @@ class Signup extends React.Component {
               .oneOf([true], "You must accept the terms and conditions.")
           })}
           onSubmit={values => {
-            // this.props.history.push({ pathname: "/", state: values });
+            pushANewUser(values)
+            console.log(values)
+            this.props.history.push({ pathname: "/", state: values });
           }}
         >
           <Form>
             <div className="form">
               <MyTextInput
-                id="firstName"
-                label="First Name"
-                name="firstName"
+                id="name"
+                label="name"
+                name="name"
                 type="text"
               />
               <MyTextInput
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                type="text"
-              />
-              <MyTextInput
-                id="username"
-                label="Username"
-                name="username"
+                id="phoneNumber"
+                label="phone number"
+                name="phoneNumber"
                 type="text"
               />
 
