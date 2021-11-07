@@ -12,7 +12,7 @@ import {
 } from "@material-ui/core";
 
 
-import Navbar from "../homepage/home-navbar";
+// import Navbar from "../homepage/home-navbar";
 import { currUser } from "../../actions";
 import { pushANewUser } from "../../serverInterface/server";
 import "../css/SignUp.css";
@@ -98,7 +98,7 @@ class Signup extends React.Component {
   render() {
     return (
       <div className="signUpForm">
-        <Navbar />
+        {/* <Navbar /> */}
         <div className="formTitle">
           {" "}
           <h3 id="h3">Sign up</h3>
@@ -116,7 +116,7 @@ class Signup extends React.Component {
           validationSchema={Yup.object({
             name: Yup.string()
 
-              .max(15, "Must be 15 characters or less")
+              .min(2, "Too short")
 
               .required("Required"),
             phoneNumber: Yup.string()
@@ -131,7 +131,8 @@ class Signup extends React.Component {
 
               .required("Required"),
             email: Yup.string()
-              .email("Invalid email address")
+              .lowercase()
+              .email("Must be a valid email!")
               .required("Required"),
 
             acceptedTerms: Yup.boolean()
@@ -141,8 +142,8 @@ class Signup extends React.Component {
               .oneOf([true], "You must accept the terms and conditions.")
           })}
           onSubmit={values => {
-            pushANewUser(values)
-            this.props.history.push({ pathname: "/", state: values });
+            // pushANewUser(values)
+            // this.props.history.push({ pathname: "/", state: {email: values.email, password: values.password }});
           }}
         >
           <Form>

@@ -11,11 +11,11 @@ export const pushANewUser = (data) => {
    data
 ) }
 
-export const findAUser = (data) => {
-    axios.post( 
+export const findAUser =  (data) => {
+   axios.post( 
         API + '/api/users/login', 
        data
     )   
+    
 }
-console.log(findAUser.data)
 

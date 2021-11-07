@@ -12,7 +12,7 @@ import {
 } from "@material-ui/core";
 
 
-import Navbar from "../homepage/home-navbar";
+// import Navbar from "../homepage/home-navbar";
 import { currUser } from "../../actions";
 import { findAUser } from "../../serverInterface/server";
 import "../css/SignUp.css";
@@ -98,7 +98,7 @@ class Signup extends React.Component {
   render() {
     return (
       <div>
-        <Navbar />
+        {/* <Navbar /> */}
         <div className="formTitle">
           {" "}
           <h3 id="h3">Hello Again!</h3>
@@ -129,7 +129,6 @@ class Signup extends React.Component {
             //   .required("Required"),
 
             password: Yup.string()
-
               .min(8, "Must be at least 8 characters")
 
               .required("Required"),
@@ -145,7 +144,7 @@ class Signup extends React.Component {
         //       .oneOf([true], "You must accept the terms and conditions.")
         //   })}
           onSubmit={values => {
-            this.props.history.push({ pathname: "/", state: values });
+            // this.props.history.push({ pathname: "/", state: {email: values.email, password: values.password }});
           }}
         >
           <Form>
