@@ -8,8 +8,8 @@ import { useHistory } from "react-router-dom";
 import { useIsAuthenticated } from "@azure/msal-react";
 
 import "./home-navbar.css";
-import Content from "./home-content";
 import LoginAzure from "./home-login-azure";
+import LogoutAzure from "./home-logout-azure";
 
 const NavButtons = () => {
   let history = useHistory()
@@ -31,7 +31,7 @@ const NavButtons = () => {
     </div>
   );
 };
-export default function HomeTemplate() {
+export default function HomeTemplate(props) {
   const isAuthenticated = useIsAuthenticated();
   return (
     <div>
@@ -42,11 +42,11 @@ export default function HomeTemplate() {
             College Biblio
           </Typography>
           <NavButtons />
-          { isAuthenticated ? <span>Signed In</span> : <LoginAzure /> }
+          { isAuthenticated ? <span><LogoutAzure /></span> : <LoginAzure /> }
         </Toolbar>
       </AppBar>
     </Box>
-    <h5><center>Welcome to the College Biblio</center></h5>
+    {props.children}
     </div>
   );
 }

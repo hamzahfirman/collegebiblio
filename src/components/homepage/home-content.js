@@ -1,7 +1,9 @@
 import React from "react";
+import { AuthenticatedTemplate, UnauthenticatedTemplate } from "@azure/msal-react";
 
 import "./Home.css";
 import { findAUser } from "../../serverInterface/server";
+import HomeTemplate from "./home-template";
 
 
  class Content extends React.Component { 
@@ -30,9 +32,16 @@ import { findAUser } from "../../serverInterface/server";
     // }
     
     return (
-      <div className="homepage">
-        Welcome to College Biblio!
-      </div>
+      <>
+      <HomeTemplate>
+        <UnauthenticatedTemplate>
+        <h5><center>You are not signed in! Please sign in</center></h5>
+        </UnauthenticatedTemplate>
+        <AuthenticatedTemplate>
+        <h5><center>Welcome to College Biblio!</center></h5>
+        </AuthenticatedTemplate>
+      </HomeTemplate>
+      </>
     );
   }}
 
