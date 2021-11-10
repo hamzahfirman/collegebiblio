@@ -7,7 +7,7 @@ import { findAUser } from "../../serverInterface/server";
 import HomeTemplate from "./home-template";
 import { loginRequest } from "../../authConfig";
 import { callMsGraph } from "../../serverInterface/server";
-
+import SignUp from "../forms/SignUp";
 
 const ProfileContent = () => {
   const { instance, accounts } = useMsal();
@@ -35,7 +35,7 @@ const ProfileContent = () => {
   return (
       <>
       {user_email.includes(".edu")?
-             <h5><center>Welcome, {name}</center></h5>
+            <SignUp username={name}/>
              :
              <h5><center>Please sign in with your school email</center></h5>}
     

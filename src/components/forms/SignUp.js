@@ -96,13 +96,13 @@ class Signup extends React.Component {
     super(props);
   }
   render() {
+    const username = this.props.username;
     return (
       <div className="signUpForm">
-        {/* <Navbar /> */}
+
         <div className="formTitle">
-          {" "}
-          <h3 id="h3">Sign up</h3>
-          <hr id="hr"></hr>
+        <h5><center>Hi! {username}</center></h5>
+        <h5><center>Complete your profile</center></h5>
         </div>
 
         <Formik
