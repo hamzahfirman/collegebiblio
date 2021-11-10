@@ -34,12 +34,13 @@ function ProfileContent() {
 
   return (
       <>
-          <h5 className="card-title">Welcome {name}</h5>
-          {graphData ? 
-               <ProfileData graphData={graphData} />
+             <h5><center>Welcome, {name}</center></h5>
+          {/* {graphData ? 
+        
+              //  <ProfileData graphData={graphData} />
               :
               <Button  color="inherit" onClick={RequestProfileData}>Request Profile Information</Button>
-          }
+          } */}
       </>
   );
 };
