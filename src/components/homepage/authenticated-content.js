@@ -9,7 +9,7 @@ import { loginRequest } from "../../authConfig";
 import { callMsGraph } from "../../serverInterface/server";
 import SignUp from "../forms/SignUp";
 
-const ProfileContent = () => {
+const AuthenticatedContent = () => {
   const { instance, accounts } = useMsal();
   const [graphData, setGraphData] = useState(null);
 
@@ -43,7 +43,7 @@ const ProfileContent = () => {
   );
 };
 
-export default ProfileContent; 
+export default AuthenticatedContent; 
 
 
 

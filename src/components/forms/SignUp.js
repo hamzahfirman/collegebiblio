@@ -107,14 +107,19 @@ class Signup extends React.Component {
 
         <Formik
           initialValues={{
-            name: "",
+            firsName: "",
+            lastName:"",
             phoneNumber: "",
-            email: "",
-            password: "",
+            email: username,
             acceptedTerms: false // added for our checkbox
           }}
           validationSchema={Yup.object({
-            name: Yup.string()
+            firstName: Yup.string()
+
+              .min(2, "Too short")
+
+              .required("Required"),
+            lastName: Yup.string()
 
               .min(2, "Too short")
 
@@ -122,12 +127,6 @@ class Signup extends React.Component {
             phoneNumber: Yup.string()
 
               .length(10, "Must be 10-digits")
-
-              .required("Required"),
-
-            password: Yup.string()
-
-              .min(8, "Must be at least 8 characters")
 
               .required("Required"),
             email: Yup.string()
@@ -149,32 +148,38 @@ class Signup extends React.Component {
           <Form>
             <div className="form">
               <MyTextInput
-                id="name"
-                label="name"
-                name="name"
+                id="firstName"
+                label="First Name"
+                name="firstName"
+                type="text"
+              />
+              <MyTextInput
+                id="lastName"
+                label="Last Name"
+                name="lastName"
                 type="text"
               />
               <MyTextInput
                 id="phoneNumber"
-                label="phone number"
+                label="Phone Number"
                 name="phoneNumber"
                 type="text"
               />
 
               <MyTextInput
                 id="email"
-                label="student email"
+                label="Student Email"
                 name="email"
                 type="email"
                 placeholder="example@example.com"
               />
 
-              <MyTextInput
+              {/* <MyTextInput
                 id="password"
                 label="password"
                 name="password"
                 type="password"
-              />
+              /> */}
 
               <MyCheckbox name="acceptedTerms">
                 &nbsp; I accept the terms and conditions
@@ -201,15 +206,3 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, {
   currUser
 })(Signup);
-
-// <MySelect label="Job Type" name="jobType">
-// <option value="">Select a job type</option>
-
-// <option value="designer">Designer</option>
-
-// <option value="development">Developer</option>
-
-// <option value="product">Product Manager</option>
-
-// <option value="other">Other</option>
-// </MySelect>

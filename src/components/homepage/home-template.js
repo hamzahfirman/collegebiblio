@@ -7,9 +7,10 @@ import Button from "@mui/material/Button";
 import { useHistory } from "react-router-dom";
 import { useIsAuthenticated } from "@azure/msal-react";
 
-import "./home-navbar.css";
+import "./home-template.css";
 import LoginAzure from "./home-login-azure";
 import LogoutAzure from "./home-logout-azure";
+import logo from '../images/college-biblio-logo.png';
 
 const NavButtons = () => {
   let history = useHistory()
@@ -39,7 +40,7 @@ export default function HomeTemplate(props) {
       <AppBar  position="static">
         <Toolbar className="homeNavbar">
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            College Biblio
+            <img src={logo} alt="CollegeBiblio-logo" height='37px' />
           </Typography>
           <NavButtons />
           { isAuthenticated ? <span><LogoutAzure /></span> : <LoginAzure /> }
