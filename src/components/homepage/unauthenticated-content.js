@@ -16,9 +16,9 @@ const UnauthenticatedContent = () => {
 
   return (
       <>    
-     <div className='sign-in-content'><img id='sign-in-people'src={people} alt="sign-in-people" height='250px' />
-     <div id='phrase'> A library created for students by students.</div>
-    <h5 id='warning-sign-in'>It seems that you are not signed in. Please sign in!</h5>
+     <div className='sign-in-content'><div id="img-people"><img id='sign-in-people'src={people} alt="sign-in-people" height='250px' /></div>
+    <div className="text-next-img"> <div id='phrase'> A library created for students by students.</div>
+    <h5 id='warning-sign-in'>It seems that you are not signed in. Please sign in!</h5></div>
      </div>
     
       </>
