@@ -12,8 +12,9 @@ import {
 } from "@material-ui/core";
 
 
-import Navbar from "../homepage/home-navbar";
+// import Navbar from "../homepage/home-navbar";
 import { currUser } from "../../actions";
+import { pushANewUser } from "../../serverInterface/server";
 import "../css/SignUp.css";
 // Notes:
 // connect()(signUp) is equal to:
@@ -95,48 +96,42 @@ class Signup extends React.Component {
     super(props);
   }
   render() {
+    const username = this.props.username;
     return (
       <div className="signUpForm">
-        <Navbar />
+
         <div className="formTitle">
-          {" "}
-          <h3 id="h3">Sign up</h3>
-          <hr id="hr"></hr>
+        <h5><center>Hi! {username}</center></h5>
+        <h5><center>Complete your profile</center></h5>
         </div>
 
         <Formik
           initialValues={{
-            firstName: "",
-            lastName: "",
-            username: "",
-            email: "",
-            password: "",
+            firsName: "",
+            lastName:"",
+            phoneNumber: "",
+            email: username,
             acceptedTerms: false // added for our checkbox
           }}
           validationSchema={Yup.object({
             firstName: Yup.string()
 
-              .max(15, "Must be 15 characters or less")
+              .min(2, "Too short")
 
               .required("Required"),
             lastName: Yup.string()
 
-              .max(15, "Must be 15 characters or less")
+              .min(2, "Too short")
 
               .required("Required"),
-            username: Yup.string()
+            phoneNumber: Yup.string()
 
-              .max(15, "Must be 15 characters or less")
-
-              .required("Required"),
-
-            password: Yup.string()
-
-              .min(8, "Must be at least 8 characters")
+              .length(10, "Must be 10-digits")
 
               .required("Required"),
             email: Yup.string()
-              .email("Invalid email address")
+              .lowercase()
+              .email("Must be a valid email!")
               .required("Required"),
 
             acceptedTerms: Yup.boolean()
@@ -146,7 +141,8 @@ class Signup extends React.Component {
               .oneOf([true], "You must accept the terms and conditions.")
           })}
           onSubmit={values => {
-            // this.props.history.push({ pathname: "/", state: values });
+            // pushANewUser(values)
+            // this.props.history.push({ pathname: "/", state: {email: values.email, password: values.password }});
           }}
         >
           <Form>
@@ -164,26 +160,26 @@ class Signup extends React.Component {
                 type="text"
               />
               <MyTextInput
-                id="username"
-                label="Username"
-                name="username"
+                id="phoneNumber"
+                label="Phone Number"
+                name="phoneNumber"
                 type="text"
               />
 
               <MyTextInput
                 id="email"
-                label="student email"
+                label="Student Email"
                 name="email"
                 type="email"
                 placeholder="example@example.com"
               />
 
-              <MyTextInput
+              {/* <MyTextInput
                 id="password"
                 label="password"
                 name="password"
                 type="password"
-              />
+              /> */}
 
               <MyCheckbox name="acceptedTerms">
                 &nbsp; I accept the terms and conditions
@@ -210,15 +206,3 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, {
   currUser
 })(Signup);
-
-// <MySelect label="Job Type" name="jobType">
-// <option value="">Select a job type</option>
-
-// <option value="designer">Designer</option>
-
-// <option value="development">Developer</option>
-
-// <option value="product">Product Manager</option>
-
-// <option value="other">Other</option>
-// </MySelect>

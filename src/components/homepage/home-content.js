@@ -1,39 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
+import { AuthenticatedTemplate, UnauthenticatedTemplate, useMsal } from "@azure/msal-react";
 import Button from "@mui/material/Button";
-import { Redirect } from "react-router-dom";
+
+import "./Home.css";
+import { findAUser } from "../../serverInterface/server";
+import HomeTemplate from "./home-template";
+import { loginRequest } from "../../authConfig";
+import AuthenticatedContent from "./authenticated-content";
+import UnauthenticatedContent from "./unauthenticated-content";
+import { callMsGraph } from "../../serverInterface/server";
 
 
 
-
-
-class Content extends React.Component { 
-  constructor(props) {
-    super(props)
-    this.state = {
-      registered: false
-    }
-  }
-
-
-  handleOnClickRegisterButton = () => {
-    this.setState({registered: true})
-   
-  }
-
-  render(){
-   
-    if(this.state.registered) {
-      return(
-        <Redirect to= {{pathname: "/signup"}}/>
-        );
-    
-    }
+export default function Content() { 
     return (
-      <div>
-        <Button variant="contained" onClick={this.handleOnClickRegisterButton}>REGISTER</Button>
-      </div>
+      <>
+      <HomeTemplate>
+        <AuthenticatedTemplate>
+          <AuthenticatedContent />
+        </AuthenticatedTemplate>
+        <UnauthenticatedTemplate>
+          <UnauthenticatedContent />
+        </UnauthenticatedTemplate>
+      </HomeTemplate>
+      </>
     );
-    }}
+  }
 
-export default Content;
+
 

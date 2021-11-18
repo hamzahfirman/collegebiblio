@@ -1,0 +1,27 @@
+#sign-in-people {
+    margin-bottom: 10px;
+    /* float: left; */
+
+    /* margin-right:30px; */
+
+  }
+
+#img-people {
+    /* float: left; */
+    /* margin-right: 100px; */
+
+}
+.sign-in-content {
+      margin-top: 30px;
+      text-align: center;
+  }
+
+#warning-sign-in {
+    margin: 10px;
+    font-family: "omnes-pro",sans-serif;
+    font-weight: 900;
+    font-style: normal;
+    color: #F58120;
+
+  }
+
