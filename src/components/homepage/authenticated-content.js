@@ -11,6 +11,7 @@ import { callMsGraph } from "../../serverInterface/server";
 import SignUp from "../forms/SignUp";
 import  BookCard from "../books/book-card";
 import BooksData from "../books/book-data";
+import ProfileDisplay from "../../profile/profile-display";
 
 
 const AuthenticatedContent = () => {
@@ -61,6 +62,8 @@ const AuthenticatedContent = () => {
       {user_email.includes(".edu")?
             // <SignUp username={name}/>
             <BookDisplay />
+            // <ProfileDisplay />
+
              :
              <h5><center>Please sign in with your school email</center></h5>}
     

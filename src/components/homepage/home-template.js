@@ -28,7 +28,7 @@ const NavButtons = () => {
   return (
     <div>
       <Button color="inherit" onClick={handleClickHome}>HOME</Button>
-      <Button color="inherit" onClick={handleClickAbout}>ABOUT</Button>
+      <Button color="inherit" onClick={handleClickAbout}>SELL BOOK</Button>
     </div>
   );
 };

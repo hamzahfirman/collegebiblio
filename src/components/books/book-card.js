@@ -21,9 +21,9 @@ export default function BookCard(props) {
   return (
       <div>
  <span id="book-photos"><BookCarousel photoFront={props.photoFront} photoInside={props.photoInside} photoBack={props.photoBack}/></span>
-      <Card style={{ width: '29rem' }}>
+      <Card style={{ width: '25.3rem' }}>
             <Card.Body>
-            <Card.Title>{props.title}</Card.Title>
+            <Card.Title>{props.title} <span>$0.00</span></Card.Title>
             <Card.Text>
             Author: {props.author}
             </Card.Text>
@@ -33,7 +33,7 @@ export default function BookCard(props) {
             <Card.Text>
             Class: {props.class}
             </Card.Text>
-            <Button variant="primary">Contact Seller</Button>
+            <Button variant="primary" href="https://web.groupme.com/signin">Contact Seller</Button>
             </Card.Body>
         </Card>
       </div>

@@ -11,17 +11,17 @@ import { Carousel } from 'react-responsive-carousel';
 export default function BookCarousel(props) {
 
   return (
-        <Carousel showThumbs={false} width="400px" thumbWidth="30px" infiniteLoop={true} >
+        <Carousel showThumbs={false} width="350px" thumbWidth="30px" infiniteLoop={true} >
         <div>
-            <img src={props.photoFront} height="600px" />
+            <img src={props.photoFront} height="400px" />
             <p className="legend">Front</p>
         </div>
         <div>
-            <img src={props.photoInside} height="600px" />
+            <img src={props.photoInside} height="400px" />
             <p className="legend">Inside</p>
         </div>
         <div>
-            <img src={props.photoBack} height="600px" />
+            <img src={props.photoBack} height="400px" />
             <p className="legend">Back</p>
         </div>
     </Carousel>

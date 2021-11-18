@@ -1,0 +1,14 @@
+.profile-display {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.card-action {
+    text-align: center;
+}
+#sell-book {
+
+    width: 100px;
+    color: white;
+    background-color: green;
+}
