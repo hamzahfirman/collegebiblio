@@ -14,62 +14,24 @@ import "../css/ShippingAdd.css";
 import { orderPlaced } from "../../actions";
 
 const validationSchema = yup.object({
-  firstName: yup
-    .string("Enter your first name")
-    .max(15, "Must be 15 characters or less")
-    .required("Required"),
-  lastName: yup
-    .string("Enter your last name")
-    .max(15, "Must be 15 characters or less")
-    .required("Required"),
-  address: yup.string("Enter your address").required("Required"),
-  email: yup
-    .string("Enter your email")
-    .email("Enter a valid email")
-    .required("Required"),
-  phone: yup
-    .string("Enter your phone")
-    .max(10, "Must be 10 digits")
-    .min(10, "Must be 10 digits")
-    .required("Required"),
-  paymentMethod: yup.string("Select your payment method").required("Required"),
-  cardMonth: yup.string("Select your payment method").required("Required"),
-  cardYear: yup.string("Select your payment method").required("Required"),
-  cardNumber: yup
-    .string("Select your payment method")
-    .max(16, "Must be 16 digits")
-    .min(16, "Must be 16 digits")
-    .required("Required"),
-  cvvNumber: yup
-    .string("Select your payment method")
-    .max(3, "Must be 3 digits")
-    .min(3, "Must be 3 digits")
-    .required("Required"),
-  cardMonth: yup
-    .string("Select your payment method")
-    .max(2, "Must be 2 digits")
-    .min(2, "Must be 2 digits")
-    .required("Required"),
-  cardYear: yup
-    .string("Select your payment method")
-    .max(4, "Must be 4 digits")
-    .min(4, "Must be 4 digits")
-    .required("Required")
+  
+ textbookQuality: yup.string("Select your payment method").required("Required"),
+  courseId: yup.string("Select your payment method").required("Required"),
+  sellingPrice: yup.string("Select your payment method").required("Required")
+
 });
 
 const ShippingAdd = props => {
   const formik = useFormik({
     initialValues: {
-      firstName: props.user.firstName,
-      lastName: props.user.lastName,
-      address: "",
-      email: props.user.email,
-      phone: "",
-      paymentMethod: "",
-      cardNumber: "",
-      cvvNumber: "",
-      cardMonth: "",
-      cardYear: ""
+      isbnThirteen: "",
+      isbnTen: "",
+      authors: "",
+      edition: "",
+      binding: "",
+      textbookQuality: "",
+      courseId: "",
+      sellingPrice: ""
     },
     validationSchema: validationSchema,
     onSubmit: values => {
@@ -83,137 +45,58 @@ const ShippingAdd = props => {
     <div className="shippingForm">
       <div className="formTitle">
         {" "}
-        <h3>Shipping Address & Payment Method</h3>
-        <h8>FREE SHIPPING</h8>
+        <h3>Book Details</h3>
         <hr></hr>
       </div>
 
       <form onSubmit={formik.handleSubmit}>
         <div className="queries">
-          <div className="names">
-            <TextField
-              id="firstName"
-              name="firstName"
-              label="First Name"
-              variant="outlined"
-              value={formik.values.firstName}
-              onChange={formik.handleChange}
-              error={formik.touched.firstName && formik.errors.firstName}
-              helperText={formik.touched.firstName && formik.errors.firstName}
-            />
-            <TextField
-              id="lastName"
-              name="lastName"
-              label="Last Name"
-              variant="outlined"
-              value={formik.values.lastName}
-              onChange={formik.handleChange}
-              error={formik.touched.lastName && formik.errors.lastName}
-              helperText={formik.touched.lastName && formik.errors.lastName}
-            />
-          </div>
-          <div className="address">
-            <TextField
-              id="address"
-              name="address"
-              label="Address"
-              variant="outlined"
-              value={formik.values.address}
-              onChange={formik.handleChange}
-              error={formik.touched.address && formik.errors.address}
-              helperText={formik.touched.address && formik.errors.address}
-            />
-          </div>
-          <div className="email">
-            <TextField
-              id="email"
-              name="email"
-              label="Email"
-              variant="outlined"
-              placeholder="example@example.com"
-              value={formik.values.email}
-              onChange={formik.handleChange}
-              error={formik.touched.email && formik.errors.email}
-              helperText={formik.touched.email && formik.errors.email}
-            />
-            <TextField
-              id="phone"
-              name="phone"
-              label="Phone"
-              variant="outlined"
-              placeholder="xxx-xxx-xxxx"
-              value={formik.values.phone}
-              onChange={formik.handleChange}
-              error={formik.touched.phone && formik.errors.phone}
-              helperText={formik.touched.phone && formik.errors.phone}
-            />
-          </div>
           <div className="payment">
             <div className="paymentMethod">
               <InputLabel id="demo-simple-select-helper-label">
-                Payment Method
+                Textbook Quality
               </InputLabel>
               <Select
-                id="paymentMethod"
-                name="paymentMethod"
+                id="textbookQuality"
+                name="textbookQuality"
                 onChange={formik.handleChange}
                 error={
-                  formik.touched.paymentMethod && formik.errors.paymentMethod
+                  formik.touched.textbookQuality && formik.errors.textbookQuality
                 }
                 helperText={
-                  formik.touched.paymentMethod && formik.errors.paymentMethod
+                  formik.touched.textbookQuality && formik.errors.textbookQuality
                 }
               >
                 <MenuItem value="">
                   <em>None</em>
                 </MenuItem>
-                <MenuItem value="amex">American Express</MenuItem>
-                <MenuItem value="visa">Visa</MenuItem>
-                <MenuItem value="mastercard">Mastercard</MenuItem>
+                <MenuItem value="asNew">As New</MenuItem>
+                <MenuItem value="good">Good</MenuItem>
+                <MenuItem value="fair">Fair</MenuItem>
+                <MenuItem value="poor">Poor</MenuItem>
               </Select>
             </div>
             <div className="cardDetails">
+            <InputLabel id="demo-simple-select-helper-label">
+                Course ID:
+              </InputLabel>
               {" "}
               <TextField
-                id="cardNumber"
-                name="cardNumber"
-                label="Card Number"
+                id="courseId"
+                name="courseId"
+                label="ex. MATH 112"
                 variant="outlined"
-                value={formik.values.cardNumber}
+                value={formik.values.courseId}
                 onChange={formik.handleChange}
-                error={formik.touched.cardNumber && formik.errors.cardNumber}
+                error={formik.touched.courseId && formik.errors.courseId}
                 helperText={
-                  formik.touched.cardNumber && formik.errors.cardNumber
+                  formik.touched.courseId && formik.errors.courseId
                 }
               />
-              <div className="cardExpiration">
-                <TextField
-                  id="cardMonth"
-                  name="cardMonth"
-                  label="Month"
-                  variant="outlined"
-                  placeholder="xx"
-                  value={formik.values.cardMonth}
-                  onChange={formik.handleChange}
-                  error={formik.touched.cardMonth && formik.errors.cardMonth}
-                  helperText={
-                    formik.touched.cardMonth && formik.errors.cardMonth
-                  }
-                />
-
-                <TextField
-                  id="cardYear"
-                  name="cardYear"
-                  label="Year"
-                  variant="outlined"
-                  placeholder="xxxx"
-                  value={formik.values.cardYear}
-                  onChange={formik.handleChange}
-                  error={formik.touched.cardYear && formik.errors.cardYear}
-                  helperText={formik.touched.cardYear && formik.errors.cardYear}
-                />
-              </div>
               <div className="cvvNumber">
+              <InputLabel id="demo-simple-select-helper-label">
+                Selling Price:
+              </InputLabel>
                 {" "}
                 <TextField
                   id="cvvNumber"
@@ -228,10 +111,7 @@ const ShippingAdd = props => {
                     formik.touched.cvvNumber && formik.errors.cvvNumber
                   }
                 />
-                <br></br>
-                <b id="totalCost">
-                  Total Cost: ${Math.floor(props.totalCost * 100) / 100}
-                </b>
+            
               </div>
             </div>
           </div>

@@ -22,6 +22,7 @@ const AuthenticatedContent = () => {
   const user_email = accounts[0].username;
   
 
+//   Display stored books
   const BookDisplay = () => {
     return(
         <center>

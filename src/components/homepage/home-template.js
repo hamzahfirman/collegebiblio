@@ -19,7 +19,7 @@ const NavButtons = () => {
     history.push("/");
   }
   const handleClickAbout = () => { 
-    history.push("/about");
+    history.push("/sellbook");
   }
   const handleClickSignIn = () => { 
     history.push("/signin");
