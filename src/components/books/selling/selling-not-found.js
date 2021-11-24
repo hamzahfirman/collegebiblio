@@ -16,8 +16,8 @@ class BookNotFound extends React.Component {
           <br/>
         <img src={isbnNotFoundImg} alt="isbn-image" height='300px' />
         <h1>Book Not Found...</h1> <br/>
-        Try again! 
-        </div>
+        <h3> Try again! </h3>
+      </div>
 
     );
 

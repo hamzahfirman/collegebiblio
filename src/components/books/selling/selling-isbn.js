@@ -15,7 +15,7 @@ class IsbnResult extends React.Component {
 
     return (
 
-      <div className="book-data">
+      <div>
       {this.props.data.book?
        <BookFound book={this.props.data.book}/> :
        <BookNotFound />}

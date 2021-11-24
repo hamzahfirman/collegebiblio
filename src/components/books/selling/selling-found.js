@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import './selling-isbn.css';
-import SignIn from '../../forms/SignIn';
+import SendBook from '../../forms/SendBook';
 
 
 class BookFound extends React.Component {
@@ -24,6 +24,7 @@ class BookFound extends React.Component {
 
       <div className="book-data">
        
+      <div className="book-data">
         <h2>Book Details</h2>
         <p className="book-details">
         <h5>{title}</h5>
@@ -35,8 +36,9 @@ class BookFound extends React.Component {
         Publisher: {publisher} <br/>
         Published: {date_published} <br/>
         
-        </p>
-        <SignIn bookInfo={this.props.book} />
+        </p></div>
+        <center>    <SendBook bookInfo={this.props.book} /></center>
+      
         </div>
 
     );

@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { Formik, Form, useField } from "formik";
 import * as Yup from "yup";
 import { connect } from "react-redux";
@@ -9,12 +9,14 @@ import {
   Button,
   TextField
 } from "@material-ui/core";
+import NumberFormat from 'react-number-format';
 
 
 // import Navbar from "../homepage/home-navbar";
 import { currUser } from "../../actions";
 import { findAUser } from "../../serverInterface/server";
 import "../css/SignUp.css";
+import { addBook } from "../../serverInterface/server";
 // Notes:
 // connect()(signUp) is equal to:
 // function connect() {
@@ -60,6 +62,34 @@ class Thumb extends React.Component {
   }
 }
 
+/* Price Number Format */
+const NumberFormatCustom = React.forwardRef(function NumberFormatCustom(props, ref) {
+  const { onChange, ...other } = props;
+
+  return (
+    <NumberFormat
+      {...other}
+      getInputRef={ref}
+      onValueChange={(values) => {
+        onChange({
+          target: {
+            name: props.name,
+            value: values.value,
+          },
+        });
+      }}
+     
+      thousandSeparator
+      isNumericString
+      prefix="$"
+      decimalSeparator="."
+      fixedDecimalScale={true}
+      allowLeadingZeros={true}
+      decimalScale='2'
+    />
+  );
+});
+
 const MyTextInput = ({ label, ...props }) => {
   // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
 
@@ -68,22 +98,41 @@ const MyTextInput = ({ label, ...props }) => {
   // message if the field is invalid and it has been touched (i.e. visited)
 
   // '...field' = onChange, onBlur,  value & '...props' = name, id, type
-  const [field, meta] = useField(props);
-
+    const [field, meta] = useField(props);
+  if(props.name != "sellingPrice"){
+    return (
+      <div className="textField">
+        <TextField
+          htmlFor={props.id || props.name}
+          label={label}
+          variant="outlined"
+          className="text-input"
+          error={meta.touched && meta.error ? meta.error : null}
+          helperText={meta.touched && meta.error ? meta.error : null}
+          {...field}
+          {...props}
+        />
+      </div>
+    );
+  }
   return (
-    <div className="textField">
-      <TextField
-        htmlFor={props.id || props.name}
-        label={label}
-        variant="outlined"
-        className="text-input"
-        error={meta.touched && meta.error ? meta.error : null}
-        helperText={meta.touched && meta.error ? meta.error : null}
-        {...field}
-        {...props}
-      />
-    </div>
+  <div className="textField">
+    <TextField
+      htmlFor={props.id || props.name}
+      label={label}
+      variant="outlined"
+      className="text-input"
+      InputProps={{
+        inputComponent: NumberFormatCustom,
+      }}
+      error={meta.touched && meta.error ? meta.error : null}
+      helperText={meta.touched && meta.error ? meta.error : null}
+      {...field}
+      {...props}
+    />
+  </div>
   );
+
 };
 
 const MyCheckbox = ({ children, ...props }) => {
@@ -120,11 +169,11 @@ const MySelect = ({ label, ...props }) => {
       <label htmlFor={props.id || props.name}>{label}</label>
 
       <select {...field} {...props} >
-            <option value="none">None</option>
-            <option value="asNew">As New</option>
-            <option value="good">Good</option>
-            <option value="fair">Fair</option>
-            <option value="poor">Poor</option>
+            <option value="">None</option>
+            <option value="NEW">As New</option>
+            <option value="GOOD">Good</option>
+            <option value="FAIR">Fair</option>
+            <option value="POOR">Poor</option>
       </select>
       {meta.touched && meta.error ? (
         <div className="error">{meta.error}</div>
@@ -149,7 +198,7 @@ const MyUpload = ({ label, ...props}) => {
 };
 
 // And now we can use these
-class SignIn extends React.Component {
+class SendBook extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -194,9 +243,12 @@ class SignIn extends React.Component {
 
             //   .required("Required"),
 
-            textbookQuality: Yup.string("Select your payment method").required("Required"),
-            courseId: Yup.string("Select your payment method").required("Required"),
-            sellingPrice: Yup.string("Select your payment method").required("Required")
+            textbookQuality: Yup.string("Select your textbook quality").required("Required"),
+            courseId: Yup.string("Type in course name").required("Required"),
+            sellingPrice: Yup.string("").required("Required"),
+            photoFront: Yup.string("Select your payment method").required("Required"),
+            photoInside: Yup.string("Select your payment method").required("Required"),
+            photoBack: Yup.string("Select your payment method").required("Required")
             })}
 
         //     acceptedTerms: Yup.boolean()
@@ -206,30 +258,20 @@ class SignIn extends React.Component {
         //       .oneOf([true], "You must accept the terms and conditions.")
         //   })}
           onSubmit={values => {
-            alert(
-              JSON.stringify(
-                { 
-                  title: title,
-                  isbn13: isbn13,
-                  isbn: isbn,
-                  authors: authors,
-                  edition: edition,
-                  binding: binding,
-                  publisher: publisher,
-                  published: date_published,
-                  photoFront: values.photoFront, 
-                  photoInside: values.photoInside,
-                  photoBack: values.photoBack,
-                  textbookQuality: values.textbookQuality,
-                  courseId: values.courseId,
-                  sellingPrice: values.sellingPrice
-                }
-                ,
-                null,
-                2
-
-            // this.props.history.push({ pathname: "/", state: {email: values.email, password: values.password }});
-              ))}}
+            addBook({
+              title: title,
+              isbn13: isbn13, 
+              authors: authors[0],  
+              photoFront: values.photoFront, 
+              photoInside: values.photoInside,
+              photoBack: values.photoBack,
+              textbookQuality: values.textbookQuality,
+              courseName: values.courseId.toUpperCase(),
+              sellingPrice: values.sellingPrice
+              
+            })
+            this.props.history.push({ pathname: "/" });
+           }}
         >
           <Form>
             <div className="form">
@@ -304,7 +346,7 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps, {
   currUser
-})(SignIn);
+})(SendBook);
 
 // <MySelect label="Job Type" name="jobType">
 // <option value="">Select a job type</option>

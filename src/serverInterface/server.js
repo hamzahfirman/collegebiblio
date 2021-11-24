@@ -20,6 +20,15 @@ export const findAUser =  (data) => {
     
 }
 
+export const addBook =  (data) => {
+    axios.post( 
+         API + '/api/books/new', 
+        data
+     )   
+     
+ }
+
+
 /* MS Graph API  */
 /**
  * Attaches a given access token to a Microsoft Graph API call. Returns information about the user
