@@ -13,6 +13,28 @@ import { connect } from "react-redux";
 import "../css/ShippingAdd.css";
 import { orderPlaced } from "../../actions";
 
+class Thumb extends React.Component {
+  state = {
+    loading: false,
+    thumb: undefined,
+  };
+
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps.file) { return; }
+
+    this.setState({ loading: true }, () => {
+      let reader = new FileReader();
+
+      reader.onloadend = () => {
+        this.setState({ loading: false, thumb: reader.result });
+      };
+
+      reader.readAsDataURL(nextProps.file);
+    });
+  }
+
+}
+
 const validationSchema = yup.object({
   
  textbookQuality: yup.string("Select your payment method").required("Required"),
@@ -20,6 +42,7 @@ const validationSchema = yup.object({
   sellingPrice: yup.string("Select your payment method").required("Required")
 
 });
+
 
 const ShippingAdd = props => {
   const formik = useFormik({
@@ -45,7 +68,7 @@ const ShippingAdd = props => {
     <div className="shippingForm">
       <div className="formTitle">
         {" "}
-        <h3>Book Details</h3>
+        <h3>Boo Details</h3>
         <hr></hr>
       </div>
 
@@ -99,16 +122,16 @@ const ShippingAdd = props => {
               </InputLabel>
                 {" "}
                 <TextField
-                  id="cvvNumber"
-                  name="cvvNumber"
-                  label="CVV #"
+                  id="sellingPrice"
+                  name="sellingPrice"
+                  label="$0.00"
                   variant="outlined"
                   placeholder="xxx"
-                  value={formik.values.cvvNumber}
+                  value={formik.values.sellingPrice}
                   onChange={formik.handleChange}
-                  error={formik.touched.cvvNumber && formik.errors.cvvNumber}
+                  error={formik.touched.sellingPrice && formik.errors.sellingPrice}
                   helperText={
-                    formik.touched.cvvNumber && formik.errors.cvvNumber
+                    formik.touched.sellingPrice && formik.errors.sellingPrice
                   }
                 />
             

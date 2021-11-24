@@ -10,7 +10,7 @@ import { useIsAuthenticated } from "@azure/msal-react";
 import "./home-template.css";
 import LoginAzure from "./home-login-azure";
 import LogoutAzure from "./home-logout-azure";
-import logo from '../images/college-biblio-logo.png';
+import logo from '../images/college-biblio-logo-2.png';
 
 const NavButtons = () => {
   let history = useHistory()

@@ -1,0 +1,39 @@
+.isbn-text {
+    text-align: center;
+}
+
+.search-bar-ui{
+    width: 700px;
+    /* text-align: center; */
+
+}
+.search-bar{
+    margin-top: 250px auto;
+}
+.isbn-text {
+    margin-top: 100px;
+}
+.book-data {
+    /* margin-left: 550px; */
+
+    /* position: absolute; */
+    
+    /* margin-: 250px; */
+   
+}
+.book-details {
+    background-color: white;
+    padding-left: 75px;
+    padding-top: 15px;
+    
+    width: 600px;
+    height: 200px;
+}
+#isbn-title {
+    margin-right: 630px ;
+}
+#isbn-header-1 {
+    color: cadetblue;
+    margin-left: 140px;
+}
+

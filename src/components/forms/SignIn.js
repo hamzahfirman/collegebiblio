@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import { Formik, Form, useField } from "formik";
 import * as Yup from "yup";
 import { connect } from "react-redux";
@@ -22,6 +21,45 @@ import "../css/SignUp.css";
 //   return function() {
 //      return 'Hi There'
 // }}
+
+
+
+class Thumb extends React.Component {
+  state = {
+    loading: false,
+    thumb: undefined,
+  };
+
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps.file) { return; }
+
+    this.setState({ loading: true }, () => {
+      let reader = new FileReader();
+
+      reader.onloadend = () => {
+        this.setState({ loading: false, thumb: reader.result });
+      };
+
+      reader.readAsDataURL(nextProps.file);
+    });
+  }
+
+  render() {
+    const { file } = this.props;
+    const { loading, thumb } = this.state;
+
+    if (!file) { return null; }
+
+    if (loading) { return <p>loading...</p>; }
+
+    return (<img src={thumb}
+      alt={file.name}
+      className="img-thumbnail mt-2"
+      height={200}
+      width={200} />);
+  }
+}
+
 const MyTextInput = ({ label, ...props }) => {
   // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
 
@@ -81,8 +119,28 @@ const MySelect = ({ label, ...props }) => {
     <div>
       <label htmlFor={props.id || props.name}>{label}</label>
 
-      <select {...field} {...props} />
+      <select {...field} {...props} >
+            <option value="none">None</option>
+            <option value="asNew">As New</option>
+            <option value="good">Good</option>
+            <option value="fair">Fair</option>
+            <option value="poor">Poor</option>
+      </select>
+      {meta.touched && meta.error ? (
+        <div className="error">{meta.error}</div>
+      ) : null}
+    </div>
+  );
+};
 
+const MyUpload = ({ label, ...props}) => {
+  const [field, meta] = useField(props);
+
+  return (
+    <div>
+      <label htmlFor={props.id || props.name}>{label}</label>
+        <input type='file' {...field}  {...props} />
+       
       {meta.touched && meta.error ? (
         <div className="error">{meta.error}</div>
       ) : null}
@@ -91,24 +149,32 @@ const MySelect = ({ label, ...props }) => {
 };
 
 // And now we can use these
-class Signup extends React.Component {
+class SignIn extends React.Component {
   constructor(props) {
     super(props);
   }
   render() {
+    const { title, 
+      isbn13, 
+      isbn,
+      edition,
+      binding,
+      authors,
+      date_published,
+      image,
+      publisher
+     } = this.props.bookInfo
     return (
       <div>
-        {/* <Navbar /> */}
-        <div className="formTitle">
-          {" "}
-          <h3 id="h3">Hello Again!</h3>
-          <hr id="hr"></hr>
-        </div>
 
         <Formik
           initialValues={{
-            email: "",
-            password: "",
+            photoFront:"",
+            photoInside:"",
+            photoBack:"",
+            textbookQuality: "",
+            courseId: "",
+            sellingPrice: "",
             acceptedTerms: false // added for our checkbox
           }}
           validationSchema={Yup.object({
@@ -128,13 +194,9 @@ class Signup extends React.Component {
 
             //   .required("Required"),
 
-            password: Yup.string()
-              .min(8, "Must be at least 8 characters")
-
-              .required("Required"),
-            email: Yup.string()
-              .email("Invalid email address")
-              .required("Required")
+            textbookQuality: Yup.string("Select your payment method").required("Required"),
+            courseId: Yup.string("Select your payment method").required("Required"),
+            sellingPrice: Yup.string("Select your payment method").required("Required")
             })}
 
         //     acceptedTerms: Yup.boolean()
@@ -144,53 +206,88 @@ class Signup extends React.Component {
         //       .oneOf([true], "You must accept the terms and conditions.")
         //   })}
           onSubmit={values => {
+            alert(
+              JSON.stringify(
+                { 
+                  title: title,
+                  isbn13: isbn13,
+                  isbn: isbn,
+                  authors: authors,
+                  edition: edition,
+                  binding: binding,
+                  publisher: publisher,
+                  published: date_published,
+                  photoFront: values.photoFront, 
+                  photoInside: values.photoInside,
+                  photoBack: values.photoBack,
+                  textbookQuality: values.textbookQuality,
+                  courseId: values.courseId,
+                  sellingPrice: values.sellingPrice
+                }
+                ,
+                null,
+                2
+
             // this.props.history.push({ pathname: "/", state: {email: values.email, password: values.password }});
-          }}
+              ))}}
         >
           <Form>
             <div className="form">
-              {/* <MyTextInput
-                id="firstName"
-                label="First Name"
-                name="firstName"
-                type="text"
-              />
-              <MyTextInput
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                type="text"
-              />
-              <MyTextInput
-                id="username"
-                label="Username"
-                name="username"
-                type="text"
-              /> */}
 
-              <MyTextInput
-                id="email"
-                label="student email"
-                name="email"
-                type="email"
-                placeholder="example@example.com"
+              <MyUpload 
+              id="photoFront"
+              label="Photo Front"
+              name="photoFront"
+              type= "file"
               />
 
-              <MyTextInput
-                id="password"
-                label="password"
-                name="password"
-                type="password"
+              <MyUpload 
+              id="photoInside"
+              label="Photo Inside"
+              name="photoInside"
+              type= "file"
               />
-{/* 
+
+              <MyUpload 
+              id="photoBack"
+              label="Photo Back"
+              name="photoBack"
+              type= "file"
+              />
+
+            <MySelect 
+              id="textbookQuality"
+              label="Textbook Quality: "
+              name="textbookQuality"
+              type= "select"
+              />
+
+              
+              <MyTextInput
+                id="courseId"
+                label="Course ID"
+                name="courseId"
+                type="courseId"
+                placeholder="ex. MATH 112"
+              />
+
+              <MyTextInput
+                id="sellingPrice"
+                label="Selling Price"
+                name="sellingPrice"
+                type="sellingPrice"
+                placeholder="$0.00"
+              />
+
+
               <MyCheckbox name="acceptedTerms">
                 &nbsp; I accept the terms and conditions
-              </MyCheckbox> */}
+              </MyCheckbox>
             </div>
             <div id="button">
               {" "}
               <Button color="primary" variant="contained" type="submit">
-              SIGN IN
+              submit
               </Button>
             </div>
           </Form>
@@ -207,7 +304,7 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps, {
   currUser
-})(Signup);
+})(SignIn);
 
 // <MySelect label="Job Type" name="jobType">
 // <option value="">Select a job type</option>

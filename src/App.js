@@ -6,6 +6,7 @@ import SignUp from "./components/forms/SignUp";
 import SignIn from "./components/forms/SignIn";
 import About from "./components/About";
 import ShippingAdd from "./components/forms/ShippingAdd";
+import IsbnSearch from "./components/books/selling/selling-isbn";
 
 
 
@@ -15,8 +16,8 @@ const App = () => {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/signup" component={SignUp} />
-        <Route path="/signin" component={SignIn} />
-        <Route path="/sellbook" component={ShippingAdd} />
+        {/* <Route path="/signin" component={SignIn} /> */}
+        <Route path="/sellbook" component={IsbnSearch} />
       </Switch>
     </Router>
   );
