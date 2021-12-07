@@ -102,7 +102,7 @@ const SendNewBook = (props) => {
         sellingPrice: values.sellingPrice,
         sellerName: userEmail
       });
-      history.push("/bookdisplay");
+      history.push({pathname: "/"});
       // UploadImage({ photoFront: values.photoFront });
     },
   });

@@ -75,7 +75,7 @@ class IsbnSearch extends React.Component {
             value={isbn}
             onChange={(newValue) => this.setState({ isbn: newValue })}
             onRequestSearch={() => this.getIsbn(isbn)}
-            placeholder="ex.9780134093413"
+            placeholder="ex.9780134093413 or 978-0134093413"
           />
         </center>
 
