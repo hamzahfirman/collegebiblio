@@ -13,10 +13,12 @@ class BookNotFound extends React.Component {
     return (
 
       <div>
-          <br/>
-        <img src={isbnNotFoundImg} alt="isbn-image" height='300px' />
-        <h1>Book Not Found...</h1> <br/>
+        <center>
+        <br/>
+        {/* <img src={isbnNotFoundImg} alt="isbn-image" height='300px' /> */}
+        <h1>Book Not Found...</h1> 
         <h3> Try again! </h3>
+        </center>
       </div>
 
     );
