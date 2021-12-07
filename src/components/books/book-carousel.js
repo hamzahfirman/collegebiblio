@@ -16,14 +16,14 @@ export default function BookCarousel(props) {
             <img src={props.photoFront} height="400px" />
             <p className="legend">Front</p>
         </div>
-        <div>
+        {/* <div>
             <img src={props.photoInside} height="400px" />
             <p className="legend">Inside</p>
         </div>
         <div>
             <img src={props.photoBack} height="400px" />
             <p className="legend">Back</p>
-        </div>
+        </div> */}
     </Carousel>
 )};
 

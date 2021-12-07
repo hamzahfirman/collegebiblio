@@ -20,10 +20,10 @@ export default function BookCard(props) {
 
   return (
       <div>
- <span id="book-photos"><BookCarousel photoFront={props.photoFront} photoInside={props.photoInside} photoBack={props.photoBack}/></span>
+ <span id="book-photos"><BookCarousel photoFront={props.photoFront}/></span>
       <Card style={{ width: '25.3rem' }}>
             <Card.Body>
-            <Card.Title>{props.title} <span>$0.00</span></Card.Title>
+            <Card.Title><b>{props.title}</b><br/><br/><span>${props.price}</span></Card.Title>
             <Card.Text>
             Author: {props.author}
             </Card.Text>
