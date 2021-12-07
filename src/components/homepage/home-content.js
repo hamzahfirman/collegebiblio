@@ -15,14 +15,14 @@ import { callMsGraph } from "../../serverInterface/server";
 export default function Content() { 
     return (
       <>
-      <HomeTemplate>
+      
         <AuthenticatedTemplate>
           <AuthenticatedContent />
         </AuthenticatedTemplate>
         <UnauthenticatedTemplate>
           <UnauthenticatedContent />
         </UnauthenticatedTemplate>
-      </HomeTemplate>
+ 
       </>
     );
   }

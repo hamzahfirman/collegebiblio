@@ -10,12 +10,14 @@ import {
   Button,
   TextField
 } from "@material-ui/core";
+import {  Link } from "react-router-dom";
 
 
 // import Navbar from "../homepage/home-navbar";
 import { currUser } from "../../actions";
 import { pushANewUser } from "../../serverInterface/server";
 import "../css/SignUp.css";
+import { useHistory } from "react-router-dom";
 // Notes:
 // connect()(signUp) is equal to:
 // function connect() {
@@ -91,12 +93,22 @@ const MySelect = ({ label, ...props }) => {
 };
 
 // And now we can use these
-class Signup extends React.Component {
+class SignUp extends React.Component {
   constructor(props) {
     super(props);
   }
+  handleSubmit = (values) => {
+
+    // actions.setSubmitting(true)
+    console.log(values)
+    // console.log(actions)
+    const { history } = this.props
+    this.props.history.push({ pathname: "/", state: {firstName: values.firstName}})
+  }
+
   render() {
-    const username = this.props.username;
+    const {history} = this.props;
+    const username = this.props.email;
     return (
       <div className="signUpForm">
 
@@ -107,7 +119,7 @@ class Signup extends React.Component {
 
         <Formik
           initialValues={{
-            firsName: "",
+            firstName: "",
             lastName:"",
             phoneNumber: "",
             email: username,
@@ -140,9 +152,17 @@ class Signup extends React.Component {
 
               .oneOf([true], "You must accept the terms and conditions.")
           })}
-          onSubmit={values => {
-            // pushANewUser(values)
-            // this.props.history.push({ pathname: "/", state: {email: values.email, password: values.password }});
+          onSubmit={fields => {
+            this.props.history.push({ pathname: "/bookdisplay", state: {firstName: fields.firstName}});
+            // this.handleSubmit(fields)
+            
+            // history.push({ pathname: "/", state: {firstName: values.firstName}});
+            // pushANewUser({
+            //   firstName: values.firstName,
+            //   lastName: values.lastName,
+            //   phoneNumber: values.phoneNumber,
+            //   email: values.email
+            // })
           }}
         >
           <Form>
@@ -188,7 +208,7 @@ class Signup extends React.Component {
             <div id="button">
               {" "}
               <Button color="primary" variant="contained" type="submit">
-                SEND VERIFICATION EMAIL
+                DONE
               </Button>
             </div>
           </Form>
@@ -205,4 +225,4 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps, {
   currUser
-})(Signup);
+})(SignUp);

@@ -6,19 +6,19 @@ import { loginRequest } from "../../authConfig";
 
 import { findAUser } from "../../serverInterface/server";
 
-
 const handleOnClickLogoutButton = (instance) => {
-  instance.logoutRedirect(loginRequest).catch(e => {
+  instance.logoutRedirect(loginRequest).catch((e) => {
     console.error(e);
   });
-}
+};
 
-const LogoutAzure = () => { 
+const LogoutAzure = () => {
   const { instance } = useMsal();
-    return (
-        <Button color="inherit" onClick={() => handleOnClickLogoutButton(instance)}>LOG OUT</Button>
-    );
-    }
+  return (
+    <Button color="inherit" onClick={() => handleOnClickLogoutButton(instance)}>
+      LOG OUT
+    </Button>
+  );
+};
 
 export default LogoutAzure;
-

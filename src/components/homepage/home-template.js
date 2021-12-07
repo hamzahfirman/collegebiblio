@@ -13,6 +13,7 @@ import LogoutAzure from "./home-logout-azure";
 import logo from '../images/college-biblio-logo-2.png';
 
 const NavButtons = () => {
+  const isAuthenticated = useIsAuthenticated();
   let history = useHistory()
 
   const handleClickHome = () => { 
@@ -28,7 +29,8 @@ const NavButtons = () => {
   return (
     <div>
       <Button color="inherit" onClick={handleClickHome}>HOME</Button>
-      <Button color="inherit" onClick={handleClickAbout}>SELL BOOK</Button>
+      { isAuthenticated ? <Button color="inherit" onClick={handleClickAbout}>SELL BOOK</Button> : null }
+      {/* <Button color="inherit" onClick={handleClickAbout}>SELL BOOK</Button> */}
     </div>
   );
 };

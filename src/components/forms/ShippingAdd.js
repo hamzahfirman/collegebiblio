@@ -52,7 +52,7 @@ const ShippingAdd = props => {
       authors: "",
       edition: "",
       binding: "",
-      textbookQuality: "",
+      textbookQuality: "",  
       courseId: "",
       sellingPrice: ""
     },

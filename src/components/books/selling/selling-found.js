@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import './selling-isbn.css';
 import SendBook from '../../forms/SendBook';
+import SendNewBook from '../../forms/send-book';
 
 
 class BookFound extends React.Component {
@@ -26,6 +27,7 @@ class BookFound extends React.Component {
        
       <div className="book-data">
         <h2>Book Details</h2>
+        <div  id="selling-book-image" ><img src={image} height="187px"/></div>
         <p className="book-details">
         <h5>{title}</h5>
         ISBN-13: {isbn13} <br/>
@@ -37,7 +39,7 @@ class BookFound extends React.Component {
         Published: {date_published} <br/>
         
         </p></div>
-        <center>    <SendBook bookInfo={this.props.book} /></center>
+        <center>    <SendNewBook bookInfo={this.props.book} /></center>
       
         </div>
 
