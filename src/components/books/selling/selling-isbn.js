@@ -75,6 +75,12 @@ class IsbnSearch extends React.Component {
             value={isbn}
             onChange={(newValue) => this.setState({ isbn: newValue })}
             onRequestSearch={() => this.getIsbn(isbn)}
+            onCancelSearch={() => {
+              this.props.history.push('/sellbook');
+              this.setState({isbn : '', found: false}
+              );
+          
+            }}
             placeholder="ex.9780134093413 or 978-0134093413"
           />
         </center>

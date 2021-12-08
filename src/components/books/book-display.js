@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import { Grid, Box, Paper } from "@mui/material";
 import axios from "axios";
 import SearchBar from "material-ui-search-bar";
+import { useHistory } from "react-router-dom";
 
 // import "./Home.css";
 import BookCard from "./book-card";
-import BooksData from "./book-data";
+import BookNotFound from "./selling/selling-not-found";
 
 export default function BookDisplay(props) {
+  let history = useHistory();
   const [books, setBooks] = useState(false);
   const [booksData, setBooksData] = useState([]);
   const [searchValue, setSearchValue] = useState("");
@@ -23,9 +25,9 @@ export default function BookDisplay(props) {
 
 
 function searchBook(value){
-  axios.post(API + "/api/books/search", value).then((response) => {
+
+  axios.post(API + "/api/books/search", {search: value}).then((response) => {
     setBooksData(response.data);
-    setBooks(true);
   });
 }
 
@@ -64,12 +66,19 @@ function searchBook(value){
         value={searchValue}
         onChange={(newValue) => setSearchValue(newValue)}
         onRequestSearch={() => searchBook(searchValue)}
+        onCancelSearch={() => {
+          history.push('/')
+          setSearchValue('');
+        
+      
+        }}
         placeholder="Author, Title, or Course name"
       />
     </center>
       <br/>
       <br/>
-      {showBooks(booksData.data)}
+      {/* {window.location.reload()} */}
+      {booksData.data.length != 0? showBooks(booksData.data): <BookNotFound />}
       </>
     )
    

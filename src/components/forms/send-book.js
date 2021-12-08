@@ -9,9 +9,40 @@ import TextField from "@material-ui/core/TextField";
 import NumberFormat from "react-number-format";
 import { useHistory } from "react-router-dom";
 
-import { UploadImage } from "../../serverInterface/server";
+// import UploadImages from "./upload-images";
+import ImageUploader from 'react-images-upload';
 import { addBook } from "../../serverInterface/server";
 import "./send-book.css";
+
+let IMAGES_FILES = [];
+
+class UploadImages extends React.Component {
+ 
+  constructor(props) {
+      super(props);
+       this.state = { pictures: [] };
+       this.onDrop = this.onDrop.bind(this);
+  }
+
+  onDrop(picture) {
+      this.setState({
+          pictures: this.state.pictures.concat(picture),
+      });
+      IMAGES_FILES = this.state.pictures;
+  }
+  
+  render() {
+      return (
+          <ImageUploader
+              withIcon={true}
+              buttonText='Choose images'
+              onChange={this.onDrop}
+              imgExtension={['.jpg', '.gif', '.png', '.gif']}
+              maxFileSize={5242880}
+          />
+      );
+  }
+}
 
 /* Price Number Format */
 const NumberFormatCustom = React.forwardRef(function NumberFormatCustom(
@@ -91,7 +122,6 @@ const SendNewBook = (props) => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      console.log(author)
       addBook({
         title: title,
         isbn13: isbn13,
@@ -110,6 +140,7 @@ const SendNewBook = (props) => {
   return (
     <div>
       <center>
+        {/* {<UploadImages />} */}
         <form
           className="selling-book-container"
           onSubmit={formik.handleSubmit}
@@ -148,6 +179,8 @@ const SendNewBook = (props) => {
           error={formik.touched.photoBack && Boolean(formik.errors.photoBack)}
           helperText={formik.touched.photoBack && formik.errors.photoBack}
         /> */}
+
+        
           <TextField
             id="textbookQuality"
             select
@@ -177,7 +210,7 @@ const SendNewBook = (props) => {
             fullWidth
             id="courseId"
             name="courseId"
-            label="Course ID"
+            label="Course ID ex. ISTA 498"
             value={formik.values.courseId}
             onChange={formik.handleChange}
             error={formik.touched.courseId && Boolean(formik.errors.courseId)}

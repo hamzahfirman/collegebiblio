@@ -50,6 +50,7 @@ export default function HomeTemplate(props) {
       </AppBar>
     </Box>
     {props.children}
+    <center> © College Biblio {(new Date().getFullYear())}</center>
     </div>
   );
 }
